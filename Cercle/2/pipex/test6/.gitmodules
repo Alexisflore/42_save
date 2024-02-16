@@ -1,0 +1,9 @@
+[submodule "libft1"]
+	path = libft1
+	url = git@vogsphere.42paris.fr:vogsphere/intra-uuid-067fb119-71dd-4f39-a6e8-4b6ec97cfa2d-5289165-alfloren
+[submodule "intra-uuid-067fb119-71dd-4f39-a6e8-4b6ec97cfa2d-5289165-alfloren"]
+	path = intra-uuid-067fb119-71dd-4f39-a6e8-4b6ec97cfa2d-5289165-alfloren
+	url = git@vogsphere.42paris.fr:vogsphere/intra-uuid-067fb119-71dd-4f39-a6e8-4b6ec97cfa2d-5289165-alfloren
+[submodule "libft"]
+	path = libft
+	url = git@vogsphere.42paris.fr:vogsphere/intra-uuid-067fb119-71dd-4f39-a6e8-4b6ec97cfa2d-5289165-alfloren
