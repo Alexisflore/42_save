@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: alfloren <alfloren@student.42.fr>          +#+  +:+       +#+         #
+#    By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/12 16:08:31 by alfloren          #+#    #+#              #
-#    Updated: 2023/12/13 10:56:27 by alfloren         ###   ########.fr        #
+#    Updated: 2024/03/29 10:54:28 by macbookpro       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ SRCS_DIR	= ./src/
 HEADER_DIR	= ./includes/
 
 SRCS 		= $(addprefix $(SRCS_DIR),\
-				main.c hook.c mandelbrot.c julia.c tools.c burningship.c )
+				main.c hook.c tools.c fractols.c )
 
 OBJS		= $(SRCS:.c=.o)
 
@@ -33,7 +33,7 @@ endif
 
 # LIBRARY
 ifeq ($(OS), Darwin)
-	MLX_DIR 	= ./minilibx-opengl
+	MLX_DIR 	= ./minilibx_opengl
 	MLX_FLAGS	= -framework OpenGL -framework Appkit -l z
 	MLX_PATH 	= $(MLX_DIR)/libmlx.a
 	# MLX_FLAGS	= -L$(MLX_DIR) -lmlx -framework OpenGL -framework AppKit

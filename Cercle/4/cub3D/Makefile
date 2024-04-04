@@ -1,77 +1,144 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/03/29 15:26:14 by macbookpro        #+#    #+#              #
-#    Updated: 2024/03/29 15:26:15 by macbookpro       ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+NAME = cub3D
 
-# Compiler and flags
-OS	:= $(shell uname)
-COMPILER := cc
-CFLAGS := -Wall -Wextra -Werror
+OS 			:= $(shell uname)
+SRCS_DIR	= ./src/
+HEADER_DIR	= ./includes/
+
+SRCS 		= $(addprefix $(SRCS_DIR),\
+				main.c\
+				parsing/check_args.c\
+				rendering/render.c\
+			)
+
+OBJS		= $(SRCS:.c=.o)
+
+CC			= cc
+RM			= rm -f
+MF 			= Makefile
+
 ifeq ($(OS), Darwin)
-	CFLAGS += -Imlx
+    CFLAGS	= -Wall -Wextra -Werror -Imlx -I/opt/X11/include
 else
-	CFLAGS += -g3
+    CFLAGS	= -Wall -Wextra -Werror -g3
 endif
 
-# Directories
-SRCS_DIR := ./src/
-HEADER_DIR := ./includes/
-BUILD_DIR := ./build/
-OBJ_DIR := $(BUILD_DIR)obj/
-LIBFT_DIR := ./libft/
-LIBFT_SRCS := $(wildcard $(LIBFT_DIR)*.c)
-LIBFT_OBJS := $(patsubst %.c, %.o, $(LIBFT_SRCS))
-
-# Source files
-SRCS := $(addprefix $(SRCS_DIR), main.c hook.c tools.c fractals.c)
-OBJS := $(addprefix $(OBJ_DIR), $(notdir $(SRCS:.c=.o)))
-
-# Libraries
+# LIBRARY
 ifeq ($(OS), Darwin)
-	MLX_DIR := ./minilibx_opengl
-	MLX_FLAGS := -framework OpenGL -framework Appkit -l z
+	MLX_DIR 	= ./minilibx_opengl
+	MLX_FLAGS	= -framework OpenGL -framework Appkit -l z
+	MLX_PATH 	= $(MLX_DIR)/libmlx.a
+	# MLX_FLAGS	= -L$(MLX_DIR) -lmlx -framework OpenGL -framework AppKit
 else
-	MLX_DIR := ./minilibx-linux
-	MLX_FLAGS := -lXext -lX11 -lm -lbsd
+	MLX_DIR 	= ./minilibx-linux
+	MLX_FLAGS	= -lXext -lX11 -lm -lbsd
+	MLX_PATH	= $(MLX_DIR)/libmlx.a
+	# MLX_FLAGS	= -L$(MLX_DIR) -I -g3 -L /usr/X11/lib -L$(HEADER_DIR) -L$(MLX_DIR) -lmlx -I$(MLX_DIR) -lXext -lX11 -lz -lm
 endif
-MLX_PATH := $(MLX_DIR)/libmlx.a
+MAKE_MLX	= make -C $(MLX_DIR)
 
-# Targets
-NAME := fractol
+# LIBFT
+LIBFT_DIR	= ./libft
+MAKE_LIBFT	= make -s -C $(LIBFT_DIR)
+LIBFT_PATH	= $(LIBFT_DIR)/libft.a
 
-# Rules
-$(LIBFT_DIR)%.o: $(LIBFT_DIR)%.c
-	@echo "Compiling $<..."
-	@$(COMPILER) $(CFLAGS) -I $(HEADER_DIR) -c $< -o $@
+.c.o:
+			@/bin/echo -n .
+			@$(CC) $(CFLAGS) -I $(HEADER_DIR) -c $< -o $(<:.c=.o)
 
-$(OBJ_DIR)%.o: $(SRCS_DIR)%.c
-	@mkdir -p $(OBJ_DIR)
-	@echo "Compiling $<..."
-	@$(COMPILER) $(CFLAGS) -I $(HEADER_DIR) -c $< -o $@
+$(NAME):	$(MF) $(OBJS) libft mlx
+			@$(CC) $(CFLAGS) $(OBJS) $(LIBFT_PATH) $(MLX_PATH) $(MLX_FLAGS)  -o $(NAME)
+			@echo "\n${GREEN}> cub3D was successfuly compiled 🎉${END}"
 
-$(NAME): $(OBJS) $(LIBFT_OBJS)
-	@echo "Linking objects..."
-	@$(COMPILER) $(CFLAGS) -I $(HEADER_DIR) -o $@ $^ $(MLX_PATH) $(MLX_FLAGS)
-	@echo "$(NAME) has been compiled successfully."
-
-all: $(NAME)
+all: 		$(NAME)
 
 clean:
-	@$(RM) -r $(BUILD_DIR)
-	@echo "Cleaned up build files."
+			@$(RM) $(OBJS)
+			@$(MAKE_LIBFT) clean
+			@$(MAKE_MLX) clean
+			@echo "${YELLOW}> All objects files of fract-ol have been deleted ❌${END}"
 
-fclean: clean
-	@$(RM) $(NAME)
-	@echo "$(NAME) executable has been removed."
+fclean:		clean
+			@$(RM) $(NAME)
+			@$(MAKE_LIBFT) fclean
+			@$(MAKE_MLX) clean
+			@echo "${YELLOW}> Cleaning of fract-ol has been done ❌${END}"
 
-re: fclean all
+re:			fclean all
 
-.PHONY: all clean fclean re
+libft:
+			@$(MAKE_LIBFT) all bonus
 
+mlx:
+			@$(MAKE_MLX)
+
+.PHONY: all clean fclean re libft mlx
+# OS 			:= $(shell uname)
+# SRCS_DIR	= ./src/
+# HEADER_DIR	= ./includes/
+
+# SRCS 		= $(addprefix $(SRCS_DIR),\
+# 				main.c \
+# 				/parsing/check_args.c \)
+
+# OBJS		= $(SRCS:.c=.o)
+
+# CC			= cc
+# RM			= rm -f
+# MF 			= Makefile
+
+# ifeq ($(OS), Darwin)
+#     CFLAGS	= -Wall -Wextra -Werror -Imlx -I/opt/X11/include
+# else
+#     CFLAGS	= -Wall -Wextra -Werror -g3
+# endif
+
+# # LIBRARY
+# ifeq ($(OS), Darwin)
+# 	MLX_DIR 	= ./minilibx_opengl
+# 	MLX_FLAGS	= -framework OpenGL -framework Appkit -l z 
+# 	MLX_PATH 	= $(MLX_DIR)/libmlx.a
+# 	# MLX_FLAGS	= -L$(MLX_DIR) -lmlx -framework OpenGL -framework AppKit
+# else
+# 	MLX_DIR 	= ./minilibx-linux
+# 	MLX_FLAGS	= -lXext -lX11 -lm -lbsd
+# 	MLX_PATH	= $(MLX_DIR)/libmlx.a
+# 	# MLX_FLAGS	= -L$(MLX_DIR) -I -g3 -L /usr/X11/lib -L$(HEADER_DIR) -L$(MLX_DIR) -lmlx -I$(MLX_DIR) -lXext -lX11 -lz -lm
+# endif
+# MAKE_MLX	= make -C $(MLX_DIR)
+
+# # LIBFT
+# LIBFT_DIR	= ./libft
+# MAKE_LIBFT	= make -s -C $(LIBFT_DIR)
+# LIBFT_PATH	= $(LIBFT_DIR)/libft.a
+
+# .c.o:
+# 	@/bin/echo -n .
+# 	@$(CC) $(CFLAGS) -I $(HEADER_DIR) -c $< -o $(<:.c=.o)
+
+# $(NAME):	$(MF) $(OBJS) libft mlx
+# 	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT_PATH) $(MLX_PATH) $(MLX_FLAGS)  -o $(NAME)
+# 	@echo "\n${GREEN}> fract-ol was successfuly compiled 🎉${END}"
+
+# all: 		$(NAME)
+
+# clean:
+# 	@$(RM) $(OBJS)
+# 	@$(MAKE_LIBFT) clean
+# 	@$(MAKE_MLX) clean
+# 	@echo "${YELLOW}> All objects files of fract-ol have been deleted ❌${END}"
+
+# fclean:		clean
+# 	@$(RM) $(NAME)
+# 	@$(MAKE_LIBFT) fclean
+# 	@$(MAKE_MLX) clean
+# 	@echo "${YELLOW}> Cleaning of fract-ol has been done ❌${END}"
+
+# re:			fclean all
+
+# libft:
+# 	@$(MAKE_LIBFT) all bonus
+
+# mlx:
+# 	@$(MAKE_MLX)
+
+# .PHONY: 	all clean fclean re libft mlx

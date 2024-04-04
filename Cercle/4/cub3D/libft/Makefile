@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: alfloren <alfloren@student.42.fr>          +#+  +:+       +#+         #
+#    By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/07 18:01:11 by alfloren          #+#    #+#              #
-#    Updated: 2023/11/17 14:50:08 by alfloren         ###   ########.fr        #
+#    Updated: 2024/04/04 11:25:02 by macbookpro       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 

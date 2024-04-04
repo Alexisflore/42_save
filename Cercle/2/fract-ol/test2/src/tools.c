@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   tools.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alfloren <alfloren@student.42.fr>          +#+  +:+       +#+        */
+/*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 16:09:36 by alfloren          #+#    #+#             */
-/*   Updated: 2023/12/19 19:07:05 by alfloren         ###   ########.fr       */
+/*   Updated: 2024/03/28 20:17:13 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
+#include "../includes/fractol.h"
 
 int	ft_close(t_fractol *data)
 {
@@ -47,17 +47,18 @@ void	free_fractol(t_fractol *data)
 	{
 		mlx_destroy_image(data->mlx, data->img);
 		mlx_destroy_window(data->mlx, data->win);
-		mlx_destroy_display(data->mlx);
-		mlx_loop_end(data->mlx);
 		free(data->mlx);
 	}
 	free(data);
 }
 
-	// else if (data->mlx && data->img && data->fract == 3)
-	// {
-	// 	mlx_destroy_image(data->mlx, data->img);
-	// 	mlx_destroy_window(data->mlx, data->win);
-	// 	mlx_destroy_display(data->mlx);
-	// 	free(data->mlx);
-	// }
+int	mouse_julia(int x, int y, t_fractol *data)
+{
+	if (data->fract == 1 && data->julia_mouse == 1)
+	{
+		data->c_r = x * 2;
+		data->c_i = y * 2 - 800;
+		calc_pixel(data);
+	}
+	return (0);
+}

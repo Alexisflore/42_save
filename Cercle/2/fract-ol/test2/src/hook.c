@@ -3,78 +3,80 @@
 /*                                                        :::      ::::::::   */
 /*   hook.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alfloren <alfloren@student.42.fr>          +#+  +:+       +#+        */
+/*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 16:09:22 by alfloren          #+#    #+#             */
-/*   Updated: 2023/12/19 18:14:23 by alfloren         ###   ########.fr       */
+/*   Updated: 2024/03/29 11:07:35 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
+#include "../includes/fractol.h"
 
-int	key_hook2(int keycode, t_fractol *data)
+int key_hook(int keycode, t_fractol *data)
 {
-	if (keycode == 118)
-		data->color = 2050;
-	else if (keycode == 98)
-		data->color = 265;
-	else if (keycode == 106)
-		data->julia_mouse = !data->julia_mouse;
-	else if (keycode == 116)
-		data->show_text = !data->show_text;
-	return (0);
-}
-
-int	key_hook(int keycode, t_fractol *data)
-{
-	if (keycode == 65307)
+	if (keycode == KEY_ESC)
 	{
-		free_fractol(data);
-		exit(1);
-	}
-	else if (keycode == 65450)
+        free_fractol(data);
+        exit(1);
+    }
+	else if (keycode == KEY_PLUS)
 		data->it_max += 50;
-	else if (keycode == 65455)
+	else if (keycode == KEY_MINUS)
 		data->it_max -= 50;
-	else if (keycode == 65361)
+	else if (keycode == KEY_LEFT)
 		data->x1 -= 30 / data->zoom;
-	else if (keycode == 65363)
+	else if (keycode == KEY_RIGHT)
 		data->x1 += 30 / data->zoom;
-	else if (keycode == 65362)
+	else if (keycode == KEY_UP)
 		data->y1 -= 30 / data->zoom;
-	else if (keycode == 65364)
+	else if (keycode == KEY_DOWN)
 		data->y1 += 30 / data->zoom;
-	else if (keycode == 32)
-		fract_init(data);
-	else if (keycode == 99)
+	else if (keycode == KEY_SPACE)
+		fract_init(data, data->fract);
+	else if (keycode == KEY_C)
 		data->color = 1677216;
 	key_hook2(keycode, data);
-	fract_calc(data);
+	calc_pixel(data);
 	return (0);
 }
 
-void	ft_zoom(int x, int y, t_fractol *data)
+
+int key_hook2(int keycode, t_fractol *data)
 {
-	data->x1 = (x / data->zoom + data->x1) - (x / (data->zoom * 1.3));
-	data->y1 = (y / data->zoom + data->y1) - (y / (data->zoom * 1.3));
-	data->zoom *= 1.3;
-	data->it_max++;
+	if (keycode == KEY_V)
+		data->color = 2050;
+	else if (keycode == KEY_B)
+		data->color = 265;
+	else if (keycode == KEY_J)
+		data->julia_mouse = !data->julia_mouse;
+	else if (keycode == KEY_T)
+		data->show_text = !data->show_text;
+    return (0);
 }
 
-void	ft_dezoom(int x, int y, t_fractol *data)
-{
-	data->x1 = (x / data->zoom + data->x1) - (x / (data->zoom / 1.3));
-	data->y1 = (y / data->zoom + data->y1) - (y / (data->zoom / 1.3));
-	data->zoom /= 1.3;
-	data->it_max--;
+int mouse_hook(int mousecode, int x, int y, t_fractol *data) {
+    if (mousecode == MOUSE_SCROLL_UP || mousecode == MOUSE_LEFT_CLICK)
+        ft_zoom(x, y, data);
+    else if (mousecode == MOUSE_SCROLL_DOWN || mousecode == MOUSE_RIGHT_CLICK)
+        ft_dezoom(x, y, data);
+    calc_pixel(data);
+    return 0;
 }
 
-int	mouse_hook(int mousecode, int x, int y, t_fractol *data)
+void ft_zoom(int x, int y, t_fractol *data)
 {
-	if (mousecode == 4 || mousecode == 1)
-		ft_zoom(x, y, data);
-	else if (mousecode == 5 || mousecode == 2)
-		ft_dezoom(x, y, data);
-	fract_calc(data);
-	return (0);
+    double factor = 1.3;
+    data->x1 = (x / data->zoom + data->x1) - (x / (data->zoom * factor));
+    data->y1 = (y / data->zoom + data->y1) - (y / (data->zoom * factor));
+    data->zoom *= factor;
+    data->it_max++;
+}
+
+void ft_dezoom(int x, int y, t_fractol *data)
+{
+    double factor = 1.3;
+    data->x1 = (x / data->zoom + data->x1) - (x / (data->zoom / factor));
+    data->y1 = (y / data->zoom + data->y1) - (y / (data->zoom / factor));
+    data->zoom /= factor;
+    data->it_max--;
 }

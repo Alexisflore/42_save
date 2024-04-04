@@ -1,0 +1,13 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "lldb",
+      "request": "launch",
+      "args": [],
+      "cwd": "/Users/macbookpro/Documents/42/Cercle/Cercle/2/fract-ol/Rebuild/src",
+      "program": "/Users/macbookpro/Documents/42/Cercle/Cercle/2/fract-ol/Rebuild/src/build/Debug/outDebug"
+    }
+  ]
+}
