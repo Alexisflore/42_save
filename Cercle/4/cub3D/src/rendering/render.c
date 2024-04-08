@@ -1,12 +1,7 @@
 #include "cub3D.h"
+#include <time.h>
 
-void	mlx_win_init(t_data *data)
-{
-	data->win = mlx_new_window(data->mlx, SIDE_LEN, SIDE_LEN, "cub3D");
-	data->img = mlx_new_image(data->mlx, SIDE_LEN, SIDE_LEN);
-	data->img_ptr = mlx_get_data_addr(data->img,
-			&data->bpp, &data->sl, &data->endian);
-}
+
 
 void	put_pxl_to_img(t_data *data, int x, int y, int color)
 {
@@ -17,4 +12,21 @@ void	put_pxl_to_img(t_data *data, int x, int y, int color)
 		ft_memcpy(data->img_ptr + 4 * SIDE_LEN * y + x * 4,
 				&color, sizeof(int));
 	}
+}
+
+//find the number of frames per second
+int	get_fps(void)
+{
+	static int		fps = 0;
+	static time_t	oldtime = 0;
+	time_t			newtime;
+
+	time(&newtime);
+	if (newtime != oldtime)
+	{
+		oldtime = newtime;
+		fps = 0;
+	}
+	fps++;
+	return (fps);
 }

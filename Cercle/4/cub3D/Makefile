@@ -8,6 +8,9 @@ SRCS 		= $(addprefix $(SRCS_DIR),\
 				main.c\
 				parsing/check_args.c\
 				rendering/render.c\
+				parsing/colors.c\
+				parsing/initialize.c\
+				move/move.c\
 			)
 
 OBJS		= $(SRCS:.c=.o)

@@ -4,17 +4,10 @@ void   drawrays3D(t_data *data);
 int    mapX = 8;
 int    mapY = 8;
 
-int	f(int key, t_data *data)
+int	f(int keysym, t_data *data)
 {
-    if (key == KEY_UP)
-        printf("UP\n");
-    else if (key == KEY_DOWN)
-        printf("DOWN\n");
-    else if (key == KEY_LEFT)
-        printf("LEFT\n");
-    else if (key == KEY_RIGHT)
-        printf("RIGHT\n");
-    if (key == ESC_KEY)
+    printf("key = %d\n", keysym);
+    if (keysym == XK_Escape)
     {
         mlx_destroy_window(data->mlx, data->win);
         exit(0);
@@ -24,8 +17,8 @@ int	f(int key, t_data *data)
 
 bool    is_wall(t_data *data, int key)
 {
-    float x = data->px;
-    float y = data->py;
+    double x = data->px;
+    double y = data->py;
     if (key == KEY_UP)
     {
         x += data->pdx;
@@ -35,6 +28,16 @@ bool    is_wall(t_data *data, int key)
     {
         x -= data->pdx;
         y -= data->pdy;
+    }
+    else if (key == KEY_RIGHT)
+    {
+        x -= data->pdy;
+        y += data->pdx;
+    }
+    else if (key == KEY_LEFT)
+    {
+        x += data->pdy;
+        y -= data->pdx;
     }
     if (data->map[(int)(x / PIXEL_SIZE)][(int)(y / PIXEL_SIZE)] == 1
         || data->map[(int)((x + 10) / PIXEL_SIZE)][(int)((y + 10)/ PIXEL_SIZE)] == 1)
@@ -111,25 +114,16 @@ void    directtion_line(t_data *data, int color)
 
 int player_move_with_angle(int key, t_data *data)
 {
-    pixel_drawing(data, pixel(data->px, data->py, 10, 0x00000000));
-    directtion_line(data, 0x00000000);
-    if (key == KEY_UP)
+    // t_collision col;
+
+    // colision(data, &col);
+    // next_position(data, &col, key);
+    if (key == ESC_KEY)
     {
-        if (is_wall(data, key) == false)
-        {
-            data->px += data->pdx;
-            data->py += data->pdy;
-        }
+        mlx_destroy_window(data->mlx, data->win);
+        exit(0);
     }
-    else if (key == KEY_DOWN)
-    {
-        if (is_wall(data, key) == false)
-        {
-            data->px -= data->pdx;
-            data->py -= data->pdy;
-        }
-    }
-    else if (key == KEY_LEFT)
+    else if (key == KEY_CAM_LEFT)
     {
         data->pa -= 0.1;
         if (data->pa < 0)
@@ -137,7 +131,7 @@ int player_move_with_angle(int key, t_data *data)
         data->pdx = cos(data->pa) * 10;
         data->pdy = sin(data->pa) * 10;
     }
-    else if (key == KEY_RIGHT)
+    else if (key == KEY_CAM_RIGHT)
     {
         data->pa += 0.1;
         if (data->pa > 2 * PI)
@@ -145,13 +139,50 @@ int player_move_with_angle(int key, t_data *data)
         data->pdx = cos(data->pa) * 10;
         data->pdy = sin(data->pa)* 10;
     }
+    if (is_wall(data, key) == false)
+    {
+        if (key == KEY_UP)
+        {
+            data->px += data->pdx;
+            data->py += data->pdy;
+        }
+        else if (key == KEY_DOWN)
+        {
+            data->px -= data->pdx;
+            data->py -= data->pdy;
+        }
+        else if (key == KEY_RIGHT)
+        {
+            data->px -= data->pdy;
+            data->py += data->pdx;
+        }
+        else if (key == KEY_LEFT)
+        {
+            data->px += data->pdy;
+            data->py -= data->pdx;
+        }
+    }
+    // else if (key == KEY_LEFT)
+    // {
+    //     data->pa -= 0.1;
+    //     if (data->pa < 0)
+    //         data->pa += 2 * PI;
+    //     data->pdx = cos(data->pa) * 10;
+    //     data->pdy = sin(data->pa) * 10;
+    // }
+    // else if (key == KEY_RIGHT)
+    // {
+    //     data->pa += 0.1;
+    //     if (data->pa > 2 * PI)
+    //         data->pa -= 2 * PI;
+    //     data->pdx = cos(data->pa) * 10;
+    //     data->pdy = sin(data->pa)* 10;
+    // }
     else if (key == ESC_KEY)
     {
         mlx_destroy_window(data->mlx, data->win);
         exit(0);
     }
-    //draw a line that represents the direction of the player in red
-    directtion_line(data, 0x00FF0000);
     drawrays3D(data);
     pixel_drawing(data, pixel(data->px, data->py, 10, 0x00FF0000));
     return (0);
@@ -178,11 +209,11 @@ void pixel_drawing(t_data *data, t_pixel pix)
 int worldMap[9][9] =
 {
     {1,1,1,1,1,1,1,1},
-    {1,0,0,0,1,0,1,1},
     {1,0,1,0,0,0,1,1},
-    {1,0,1,1,1,0,1,1},
-    {1,0,0,0,1,0,1,1},
-    {1,0,0,0,1,0,1,1},
+    {1,0,1,0,0,0,0,1},
+    {1,0,1,1,1,1,0,1},
+    {1,0,0,0,0,1,0,1},
+    {1,1,1,1,0,1,0,1},
     {1,0,0,0,0,0,0,1},
     {1,1,1,1,1,1,1,1}
 };
@@ -201,7 +232,12 @@ void drawmap(t_data *data)
         y = 0;
         while (y < SIDE_LEN)
         {
-            pixel_drawing(data, pixel(x, y, 1, 0x00000000));
+            if (x > 530 && y < 160)
+                pixel_drawing(data, pixel(x, y, 1, convertRGBtoHex(102, 178, 255)));
+            else if (x > 530 && y > 160 && y < 320)
+                pixel_drawing(data, pixel(x, y, 1, convertRGBtoHex(128, 64, 32)));
+            else
+                pixel_drawing(data, pixel(x, y, 1, convertRGBtoHex(0, 0, 0)));
             y++;
         }
         x++;
@@ -259,7 +295,6 @@ void check_horizontal_lines(t_data *data, t_ray *ray)
         ray->mx = (int)(ray->rx) >> 6;
         ray->my = (int)(ray->ry) >> 6;
         ray->mp = ray->my * ray->mx;
-        printf("ray->mx = %d, ray->my = %d\n", ray->mx, ray->my);
         if (ray->mx >= 0 && ray->my >= 0 && ray->mx <= data->mapX && ray->my <= data->mapY && data->map[ray->mx][ray->my] == 1)
         {
             ray->dof = 8;
@@ -322,7 +357,6 @@ void draw_ray(t_data *data, t_ray *rayH, t_ray *rayV, int color)
 {
     if (rayH->disT < rayV->disT)
     {
-        //green color ray
         draw_line(data, data->px, data->py, rayH->rx, rayH->ry, color);
     }
     else
@@ -342,41 +376,109 @@ void find_angle(t_ray *rayH, t_ray *rayV)
 
 void    find_distT(t_data *data, t_ray *rayH, t_ray *rayV)
 {
+    double ca;
+    ca = data->pa - rayH->ra;
+    if (ca < 0)
+        ca += 2 * PI;
+    if (ca > 2 * PI)
+        ca -= 2 * PI;
     if (rayH->disT < rayV->disT)
+    {
         data->distT = rayH->disT;
-    else 
+        if (rayH->ra < PI && rayH->ra > 0)
+            data->texture = data->textures->north;
+        else
+            data->texture = data->textures->south;
+    }
+    else
+    {
+        if (rayV->ra > P2 && rayV->ra < P3)
+            data->texture = data->textures->west;
+        else
+            data->texture = data->textures->east;
         data->distT = rayV->disT;
+        data->shade = 0.5;
+    }
+    data->distT *= cos(ca);
 }
 
 void    draw3Dwall(t_data *data, t_ray *rayH, t_ray *rayV)
 {
+    data->shade = 1;
     find_distT(data, rayH, rayV);
-    double lineH = (PIXEL_SIZE * 320) / data->distT;
-    if (lineH > 320)
-        lineH = 320;
-    double lineO = 160 - lineH / 2;
-    //draw a wall of 8 pixels large and lineH pixels high
-    draw_line(data, 530 + rayH->r * 8, lineO, 530 + rayH->r * 8, lineO + lineH, 0x00FF0000);
+    int lineH = (PIXEL_SIZE * 320) / data->distT;
+    double ty_step = 64.0 / (double)lineH;
+    double lineOff;
+    lineOff = 160 - (lineH>>1);
+    // t_xpm wall;
+
+    // wall = data->texture;
+    double ty = 0;
+    double tx = 0;
+    // double tx_step = 1;
+    if (data->shade == 1)
+    {
+        tx = (int) (rayH->rx/2) % 64;
+        if (rayH->ra > PI)
+            tx = 64 - tx - 1;
+    }
+    else
+    {
+        tx = (int) (rayV->ry/2) % 64;
+        if (rayV->ra < P2 || rayV->ra > P3)
+            tx = 64 - tx - 1;
+    }
+    // wall.img = mlx_xpm_file_to_image(data->mlx, "Ouest.xpm", &wall.width, &wall.height);
+    // if (wall.img == NULL)
+    // {
+    //     // Handle error loading texture
+    //     return;
+    // }
+    // Get the pixel data of the texture
+    // wall.texture = (int *)mlx_get_data_addr(wall.img, &wall.bpp, &wall.size_line, &wall.endian);
+    //Draw the texture
+    int j = 0;
+    int i = 0;
+    // double x;
+    while (j < lineH && lineOff + j <= 320)
+    {
+        i = 0;
+        if (lineOff + j >= 0)
+        {
+            // x = (int)tx;
+            // while (i < 8)
+            // {
+                // int color = wall.texture[(int)tx + 32 * (int)ty];
+                int color = data->texture->texture[(int)tx + 64 * (int)ty];
+                put_pxl_to_img(data, 530 + rayH->r + i, lineOff + j, color);
+                // pixel_drawing(data, pixel(530 + rayH->r , lineOff + j, 4, color));
+            //     i++;
+            // //     // x += tx_step;
+            // }
+        }
+        ty += ty_step;
+        j++;
+    }
 }
+
 void   drawrays3D(t_data *data)
 {
     t_ray rayH;
     t_ray rayV;
 
     drawmap(data);
-    rayV.ra = data->pa - DR * 30;
+    rayV.ra = data->pa - DR8 * 30 * 8;
     find_angle(&rayH, &rayV);
     rayH.r = 0;
-    while (rayH.r < 60)
+    while (rayH.r < 60 * 8)
     {
         rayH.disT = 1000000;
         rayV.disT = 1000000;
         check_horizontal_lines(data, &rayH);
         check_vertical_lines(data, &rayV);
-        //gree color ray
         draw_ray(data, &rayH, &rayV, 0x0000FF00);
         draw3Dwall(data, &rayH, &rayV);
-        rayV.ra += DR;
+        rayV.ra += DR8;
         find_angle(&rayH, &rayV);
         rayH.r++;
     }
@@ -385,48 +487,18 @@ void   drawrays3D(t_data *data)
 
 int	main(void)
 {
-
-    void	*mlx;
-	void	*img;
-	char	*relative_path = "./haha.xpm";
-	int		img_width;
-	int		img_height;
     int **worldmap = malloc(sizeof(int *) * 9);
     for (int i = 0; i < 9; i++)
         worldmap[i] = malloc(sizeof(int) * 9);
-
     for (int i = 0; i < 9; i++)
     {
         for (int j = 0; j < 9; j++)
-        {
             worldmap[i][j] = worldMap[j][i];
-        }
     }
-	mlx = mlx_init();
-	img = mlx_xpm_file_to_image(mlx, relative_path, &img_width, &img_height);
-    if (img == NULL)
-    {
-        printf("Error\n");
-        printf("xpm file not found\n");
-        return (1);
-    }
-    img_width = 1024;
-    img_height = 1024;
     t_data data;
-    data.mapX = 8;
-    data.mapY = 8;
-    data.map = worldmap;
-    data.mlx = mlx;
-    data.px = PIXEL_SIZE + 1;
-    data.py = PIXEL_SIZE + 1;
-    data.pdx = 0;
-    data.pdy = 0;
-    //data.pa represents the angle of the player in radians
-    data.pa = PI / 2;
-    mlx_win_init(&data);
-    // mlx_put_image_to_window(mlx, data.win, img, 0, 0);
-    //while a key is pressed, the function player_move is called
+    mlx_win_init(&data, worldmap);
+    // mlx_key_hook(data.win, f, &data);
     mlx_hook(data.win, KeyPress, KeyPressMask, player_move_with_angle, &data);
-    mlx_loop(mlx);
+    mlx_loop(data.mlx);
     return (0);
 }
