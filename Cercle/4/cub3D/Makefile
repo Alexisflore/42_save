@@ -11,6 +11,11 @@ SRCS 		= $(addprefix $(SRCS_DIR),\
 				parsing/colors.c\
 				parsing/initialize.c\
 				move/move.c\
+				rendering/find_values.c\
+				rendering/check_lines.c\
+				rendering/draw_pixels.c\
+				rendering/drawing.c\
+				move/player_move.c\
 			)
 
 OBJS		= $(SRCS:.c=.o)

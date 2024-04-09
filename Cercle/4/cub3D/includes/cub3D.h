@@ -6,7 +6,7 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 15:26:41 by macbookpro        #+#    #+#             */
-/*   Updated: 2024/04/08 13:29:04 by macbookpro       ###   ########.fr       */
+/*   Updated: 2024/04/09 15:20:55 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 # include <X11/X.h>
 
 #define MALLOC_ERROR    1
-#define	SIDE_LEN        960
+#define	SIDE_LEN        600
 #define ESC_KEY         53
 #define KEY_UP          13
 #define KEY_DOWN        1
@@ -42,11 +42,20 @@
 #define FAILURE         1
 #define PI              3.14159265359
 #define P2              PI / 2
-#define P3              3 * PI / 2   
-#define DR              0.0174533
-#define DR8             0.0021816616    
+#define P3              3 * PI / 2
+#define DR              0.00174533
 #define PIXEL_SIZE      64
 #define PIXEL_TEXTURE   64
+
+typedef struct t_wall
+{
+    double tx;
+    double ty;
+    double ty_step;
+    double lineOff;
+    double  lineH;
+    double  color;
+}           t_wall;
 
 typedef struct rgb
 {
@@ -86,7 +95,6 @@ typedef struct s_map
     t_rgb *ceiling;
 }               t_map;
 
-
 typedef struct s_pixel
 {
     int size;
@@ -122,6 +130,7 @@ typedef struct	s_data
     int     **map;
     int     mapX;
     int     mapY;
+    int     horizon;
     double  px;
     double  py;
     double  pdx;
@@ -132,12 +141,6 @@ typedef struct	s_data
     double  shade;
     t_texture *textures;
     t_xpm *texture;
-    double tx;
-    double ty;
-    double ty_step;
-    double lineOff;
-    double  lineH;
-    double  color;
 }				t_data;
 
 
@@ -153,18 +156,38 @@ typedef struct t_collision
     int ipy_sub_yo;
 }               t_collision;
 
-/* parsing.c */
+/* parsing */
 int check_args(int argc, char **argv);
 
-/* parsing_utils.c */
+/* rendering */
+t_pixel pixel(int x, int y, int size, int color);
+void    pixel_drawing(t_data *data, t_pixel pix);
+void    draw_line(t_data *data, int x1, int y1, int x2, int y2, int color);
+void    draw_floor_and_ceiling(t_data *data);
+void    drawrays3D(t_data *data);
 void    mlx_win_init(t_data *data, int **worldmap);
 void    put_pxl_to_img(t_data *data, int x, int y, int color);
+void    draw3Dwall(t_data *data, t_ray *rayH, t_ray *rayV);
+void    find_angle(t_ray *rayH, t_ray *rayV);
+void    check_vertical_lines(t_data *data, t_ray *ray);
+void    init_rayV(t_ray *ray, t_data *data);
+void    check_horizontal_lines(t_data *data, t_ray *ray);
+void    init_rayH(t_ray *ray, t_data *data);
+void    draw_ray(t_data *data, t_ray *rayH, t_ray *rayV, int color);
+double  dist(double x1, double y1, double x2, double y2);
+int     convertRGBtoHex(int r, int g, int b);
+void    find_distT(t_data *data, t_ray *rayH, t_ray *rayV);
+int     get_fps(void);
+void    drawmap(t_data *data);
 
-/* colors.c */
-int convertRGBtoHex(int r, int g, int b);
+/* move */
+bool is_wall(t_data *data, int key);
+int player_move_with_angle(int key, t_data *data);
+void    next_position(t_data *data, t_collision *col, int key);
+
 
 void    colision(t_data *data, t_collision *col);
 
-void    next_position(t_data *data, t_collision *col, int key);
 
-int	get_fps(void);
+
+
