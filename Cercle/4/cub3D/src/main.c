@@ -36,7 +36,8 @@ int worldMap[30][30] = {
 int	f(int keysym, t_data *data)
 {
     printf("key = %d\n", keysym);
-    if (keysym == XK_Escape)
+    // if (keysym == XK_Escape) // Need X11
+    if (keysym == 53)
     {
         mlx_destroy_window(data->mlx, data->win);
         exit(0);
@@ -58,7 +59,7 @@ int	main(void)
     t_data data;
     mlx_win_init(&data, worldmap);
     // mlx_key_hook(data.win, f, &data);
-    mlx_hook(data.win, KeyPress, KeyPressMask, player_move_with_angle, &data);
+	mlx_hook(data.win, 02, (1L<<0), player_move_with_angle, &data);
     mlx_loop(data.mlx);
     free_data(&data);
     return (0);
@@ -205,7 +206,7 @@ int	main(void)
 // }
 
 // void key_cam_move(int key, t_data *data)
-// {    
+// {
 //     if (key == KEY_CAM_LEFT)
 //     {
 //         data->pa -= 0.1;
@@ -304,7 +305,7 @@ int	main(void)
 //         while (y < data->mapY)
 //         {
 //             if (data->map[x][y] == 1)
-//                 color = 0x00FFFFFF; 
+//                 color = 0x00FFFFFF;
 //             else
 //                 color = 0x00000000;
 //             pixel_drawing(data, pixel(x * PIXEL_SIZE, y * PIXEL_SIZE, PIXEL_SIZE, color));
@@ -490,12 +491,12 @@ int	main(void)
 //             wall->tx = 64 - wall->tx - 1;
 //     }
 //     return (wall);
-// }   
+// }
 
 // void    draw3Dwall(t_data *data, t_ray *rayH, t_ray *rayV)
 // {
 //     t_wall *wall;
-    
+
 //     wall = init_wall(data, rayH, rayV);
 //     int j = 0;
 //     while (j < wall->lineH && wall->lineOff + j <= 320)

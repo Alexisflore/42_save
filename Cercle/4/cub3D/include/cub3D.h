@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
+/*   By: ladloff <ladloff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 15:26:41 by macbookpro        #+#    #+#             */
-/*   Updated: 2024/04/12 10:54:20 by macbookpro       ###   ########.fr       */
+/*   Updated: 2024/04/12 11:25:14 by ladloff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft/libft.h"
-#include "../src/get_next_line/get_next_line.h"
-#include "../minilibx_opengl/mlx.h"
+#include "libft.h"
+#include "get_next_line.h"
+#include "mlx.h"
 #include <stdlib.h>
 #include <stdio.h>
 # include <errno.h>
@@ -25,8 +25,8 @@
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <unistd.h>
-# include <X11/keysym.h>
-# include <X11/X.h>
+// # include <X11/keysym.h>
+// # include <X11/X.h>
 
 #define MALLOC_ERROR    1
 #define	SIDE_LEN        600
