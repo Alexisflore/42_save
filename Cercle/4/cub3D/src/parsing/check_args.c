@@ -6,7 +6,7 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 15:02:46 by macbookpro        #+#    #+#             */
-/*   Updated: 2024/04/12 14:12:09 by macbookpro       ###   ########.fr       */
+/*   Updated: 2024/04/12 14:39:51 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,14 @@ void t_map_add_back(t_map **alst, t_map *new)
     tmp->next = new;
 }
 
-int nbr_of_texture(t_path *path)
+int is_all_textures(t_path *path)
 {
-    if (path->so == NULL
-        || path->we == NULL
-        || path->ea == NULL
-        || path->no == NULL
-        || path->floor == NULL
-        || path->ceiling == NULL)
+    if (path->textures->west != NULL
+    && path->textures->east != NULL
+    && path->textures->north != NULL
+    && path->textures->south != NULL
+    && path->floor != NULL
+    && path->ceiling != NULL)
         return (1);
     return (0);
 }
@@ -176,7 +176,7 @@ void check_texture(t_path *path)
         check_first_texture(path->textures->north, path);
 }
 
-int check_nbr(char *str, t_path *path, int *rgb)
+void check_nbr(char *str, t_path *path, int *rgb)
 {
     int i;
     int len;
@@ -196,14 +196,13 @@ int check_nbr(char *str, t_path *path, int *rgb)
     *rgb = ft_atoi(str);
     if (*rgb < 0 || *rgb > 255)
         error_path(path, "Error\nInvalid RGB value\n");
-    return (0);
 }
 
-void    fill_rgb(t_path *path, t_rgb *rgb)
+void    fill_rgb(t_path *path, t_rgb **rgb)
 {
-    rgb->r = check_nbr(path->rgb[0], path, &rgb->r);
-    rgb->g = check_nbr(path->rgb[1], path, &rgb->g);
-    rgb->b = check_nbr(path->rgb[2], path, &rgb->b);
+    check_nbr(path->rgb[0], path, &(*rgb)->r);
+    check_nbr(path->rgb[1], path, &(*rgb)->g);
+    check_nbr(path->rgb[2], path, &(*rgb)->b);
 }
 
 void create_rgb(t_path *path, t_rgb **rgb)
@@ -213,7 +212,7 @@ void create_rgb(t_path *path, t_rgb **rgb)
     *rgb = malloc(sizeof(t_rgb));
     if (*rgb == NULL)
         error_path(path, "Error\nMalloc floor\n");
-    fill_rgb(path, *rgb);
+    fill_rgb(path, rgb);
 }
 
 void check_rgb(t_path *path)
@@ -222,25 +221,9 @@ void check_rgb(t_path *path)
     if (path->rgb == NULL)
         error_path(path, "Error\nMalloc RGB\n");
     if (ft_strcmp(path->split[0], "F") == 0)
-    {
-        // if (path->floor != NULL)
-        //     error_path(path, "Error\nDuplicate floor\n");
-        // path->floor = malloc(sizeof(t_rgb));
-        // if (path->floor == NULL)
-        //     error_path(path, "Error\nMalloc floor\n");
-        // fill_rgb(path, path->floor);
         create_rgb(path, &path->floor);
-    }
     else if (ft_strcmp(path->split[0], "C") == 0)
-    {
-        // if (path->ceiling != NULL)
-        //     error_path(path, "Error\nDuplicate ceiling\n");
-        // path->ceiling = malloc(sizeof(t_rgb));
-        // if (path->ceiling == NULL)
-        //     error_path(path, "Error\nMalloc ceiling\n");
-        // fill_rgb(path, path->ceiling);
         create_rgb(path, &path->ceiling);
-    }
     free_char_array(path->rgb);
     path->rgb = NULL;
 }
@@ -438,7 +421,7 @@ void   check_map(t_path *path)
 
 void    final_check(t_path *path)
 {
-    if (nbr_of_texture(path) == 1)
+    if (is_all_textures(path) == 0)
         error_path(path, "Error\nMissing texture\n");
     check_map(path);
 }
@@ -458,12 +441,12 @@ void    check_textures_and_rgb(t_path *path)
 void check_data(int fd, t_path *path)
 {
     path->line = get_next_line(fd);
-    while (path->line != NULL && nbr_of_texture(path) == 1)
+    while (path->line != NULL && is_all_textures(path) == 0)
     {
         check_textures_and_rgb(path);
         path->line = get_next_line(fd);
     }
-    while (path->line != NULL && nbr_of_texture(path) == 0)
+    while (path->line != NULL && is_all_textures(path) == 1)
     {
         create_map(path);
         path->line = get_next_line(fd);
