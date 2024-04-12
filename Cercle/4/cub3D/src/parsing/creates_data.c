@@ -6,7 +6,7 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 19:21:12 by macbookpro        #+#    #+#             */
-/*   Updated: 2024/04/12 19:29:44 by macbookpro       ###   ########.fr       */
+/*   Updated: 2024/04/12 19:31:05 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,8 @@ void create_final_map(t_path *path)
     int x;
     int y;
 
+    y = 0;
+    x = 0;
     while (y < path->mapY)
     {
         x = 0;
