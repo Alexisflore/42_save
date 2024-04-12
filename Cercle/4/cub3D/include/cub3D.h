@@ -6,7 +6,7 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 15:26:41 by macbookpro        #+#    #+#             */
-/*   Updated: 2024/04/12 14:48:21 by macbookpro       ###   ########.fr       */
+/*   Updated: 2024/04/12 17:10:28 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,10 +197,9 @@ int     is_texture(char *str);
 int     is_rgb(char *str);
 void    free_map(t_map **map);
 int     size_x(t_map *map);
-int     max_size(t_map *map);
-void    create_x_array(t_path *path, int i, int size_y);
+int     max_size(t_path *path, t_map *map);
+void    create_x_array(t_path *path, int i, t_map *map);
 void    test4wall(t_path *path, int i, int j);
-bool    is_a_player(int c);
 void    check_wall_around(t_path *path, int i, int j);
 void    verify_closed_map(t_path *path);
 void    create_map_array(t_path *path);
@@ -212,6 +211,7 @@ t_path  *check_args(int argc, char **argv);
 void    t_map_add_back(t_map **alst, t_map *new);
 void    error_check(t_path *path, char *message);
 void    init_image_texture(t_data *data, t_xpm *texture, char *file);
+int     is_all_spaces_or_newline(t_path *path);
 
 /* rendering */
 t_pixel pixel(int x, int y, int size, int color);
