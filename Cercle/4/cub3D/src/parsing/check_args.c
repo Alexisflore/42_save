@@ -6,7 +6,7 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 15:02:46 by macbookpro        #+#    #+#             */
-/*   Updated: 2024/04/12 19:25:26 by macbookpro       ###   ########.fr       */
+/*   Updated: 2024/04/12 19:28:08 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void    final_check(t_path *path)
     if (path->player_orientation == 0)
         error_path(path, "Error\nMissing player orientation\n");
     check_map(path);
+    create_final_map(path);
 }
 
 void check_data(int fd, t_path *path)

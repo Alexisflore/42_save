@@ -6,7 +6,7 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 19:18:28 by macbookpro        #+#    #+#             */
-/*   Updated: 2024/04/12 19:20:28 by macbookpro       ###   ########.fr       */
+/*   Updated: 2024/04/12 19:28:51 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,11 @@ void next_data(t_path *path, int fd)
 {
     free(path->line);
     path->line = get_next_line(fd);
+}
+
+void    fill_rgb(t_path *path, t_rgb **rgb)
+{
+    check_nbr(path->rgb[0], path, &(*rgb)->r);
+    check_nbr(path->rgb[1], path, &(*rgb)->g);
+    check_nbr(path->rgb[2], path, &(*rgb)->b);
 }

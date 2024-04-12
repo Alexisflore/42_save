@@ -6,6 +6,7 @@ void   exit_error(char *message, t_data *data)
     free_data(data);
     exit(1);
 }
+
 void    init_values(t_data *data, int **worldmap)
 {
     data->mapX = 30;

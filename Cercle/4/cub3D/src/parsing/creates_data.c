@@ -6,7 +6,7 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 19:21:12 by macbookpro        #+#    #+#             */
-/*   Updated: 2024/04/12 19:22:26 by macbookpro       ###   ########.fr       */
+/*   Updated: 2024/04/12 19:29:44 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,9 +91,20 @@ void create_rgb(t_path *path, t_rgb **rgb)
     fill_rgb(path, rgb);
 }
 
-void    fill_rgb(t_path *path, t_rgb **rgb)
+void create_final_map(t_path *path)
 {
-    check_nbr(path->rgb[0], path, &(*rgb)->r);
-    check_nbr(path->rgb[1], path, &(*rgb)->g);
-    check_nbr(path->rgb[2], path, &(*rgb)->b);
+    int x;
+    int y;
+
+    while (y < path->mapY)
+    {
+        x = 0;
+        while (x < path->mapX)
+        {
+            if (path->map_array[y][x] == -1)
+                path->map_array[y][x] = 1;
+            x++;
+        }
+        y++;
+    }
 }
