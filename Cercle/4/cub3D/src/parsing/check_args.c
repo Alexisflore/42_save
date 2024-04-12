@@ -6,7 +6,7 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 15:02:46 by macbookpro        #+#    #+#             */
-/*   Updated: 2024/04/12 18:57:37 by macbookpro       ###   ########.fr       */
+/*   Updated: 2024/04/12 19:05:30 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -266,7 +266,7 @@ void create_x_array(t_path *path, int i, t_map *tmp)
 
 void test4wall(t_path *path, int i, int j)
 {
-    if (i == 0 || i == path->mapX - 1 || j == 0 || j == path->mapY - 1)
+    if (i == 0 || i == path->mapY - 1 || j == 0 || j == path->mapX - 1)
         error_path(path, "Error\nMap not closed\n");
     if (path->map_array[i - 1][j] == -1
     || path->map_array[i + 1][j] == -1
@@ -287,10 +287,10 @@ void verify_closed_map(t_path *path)
     int j;
 
     i = 0;
-    while (i < path->mapX)
+    while (i < path->mapY)
     {
         j = 0;
-        while (j < path->mapY)
+        while (j < path->mapX)
         {
             check_wall_around(path, i, j);
             j++;
