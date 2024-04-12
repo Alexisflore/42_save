@@ -6,7 +6,7 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 15:02:46 by macbookpro        #+#    #+#             */
-/*   Updated: 2024/04/12 17:44:05 by macbookpro       ###   ########.fr       */
+/*   Updated: 2024/04/12 18:09:06 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,47 +38,7 @@ int is_all_textures(t_path *path)
         return (1);
     return (0);
 }
-void    free_intarray(int **array)
-{
-    int i;
 
-    i = 0;
-    while (array[i] != NULL)
-    {
-        free(array[i]);
-        i++;
-    }
-    free(array);
-}
-void free_char_array(char **array)
-{
-    int i;
-
-    i = 0;
-    while (array[i] != NULL)
-    {
-        free(array[i]);
-        i++;
-    }
-    free(array);
-}
-
-void error_path(t_path *path, char *message)
-{
-    perror(message);
-    free(path->so);
-    free(path->we);
-    free(path->ea);
-    free(path->no);
-    free(path->floor);
-    free(path->ceiling);
-    free_char_array(path->split);
-    free_char_array(path->rgb);
-    free_map(&path->map);
-    free_intarray(path->map_array);
-    free(path);
-    exit(1);
-}
 
 // void init_path(t_path *path)
 // {
@@ -114,23 +74,6 @@ void is_right_xpm_file(t_path *path, char *file)
     if (img == NULL)
         error_path(path, "Error\nInvalid texture\n");
     mlx_destroy_image(mlx, img);
-}
-
-void init_img_xpm(t_xpm **texture, t_path *path, char *file)
-{
-    int len;
-
-    len = ft_strlen(file);
-    if (file[len -1] == '\n')
-        file[len - 1] = '\0';
-    (*texture)->img = mlx_xpm_file_to_image(path->mlx, file,
-        &(*texture)->width, &(*texture)->height);
-    if ((*texture)->img == NULL)
-        error_path(path, "Error\nInvalid (*texture)\n");
-    (*texture)->addr = mlx_get_data_addr((*texture)->img, &(*texture)->bpp,
-        &(*texture)->size_line, &(*texture)->endian);
-    (*texture)->texture = (int *)mlx_get_data_addr((*texture)->img, &(*texture)->bpp,
-        &(*texture)->size_line, &(*texture)->endian);
 }
 
 void check_first_texture(t_xpm **texture, t_path *path)
@@ -224,24 +167,6 @@ int is_a_direction(char c)
     return (0);
 }
 
-int int_line(t_path **path, int i)
-{
-    if ((*path)->line[i] == '1' || (*path)->line[i] == '0')
-        return((*path)->line[i] - '0');
-    else if (is_a_direction((*path)->line[i]))
-    {
-        (*path)->player_orientation = (*path)->line[i];
-        return (2);
-    }
-    else if ((*path)->line[i] == ' ' || (*path)->line[i] == '\t')
-        return (-1);
-    else
-    {
-        error_path(*path, "Error\nInvalid map\n");
-        return (-1);
-    }
-}
-
 int is_all_spaces_or_newline(t_path *path)
 {
     int i;
@@ -299,20 +224,6 @@ int is_rgb(char *str)
         || ft_strcmp(str, "C") == 0)
         return (1);
     return (0);
-}
-
-void free_map(t_map **map)
-{
-    t_map *tmp;
-
-    while (*map != NULL)
-    {
-        tmp = *map;
-        *map = (*map)->next;
-        free(tmp->line);
-        free(tmp);
-    }
-    free(*map);
 }
 
 int size_x(t_map *map)
@@ -480,12 +391,12 @@ void check_data(int fd, t_path *path)
     close(fd);
 }
 
-void error_check(t_path *path, char *message)
-{
-    perror(message);
-    free(path);
-    exit(1);
-}
+// void error_check(t_path *path, char *message)
+// {
+//     perror(message);
+//     free(path);
+//     exit(1);
+// }
 
 t_path *check_args(int argc, char **argv)
 {

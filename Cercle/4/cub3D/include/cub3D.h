@@ -6,7 +6,7 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 15:26:41 by macbookpro        #+#    #+#             */
-/*   Updated: 2024/04/12 17:10:28 by macbookpro       ###   ########.fr       */
+/*   Updated: 2024/04/12 18:08:14 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -212,6 +212,9 @@ void    t_map_add_back(t_map **alst, t_map *new);
 void    error_check(t_path *path, char *message);
 void    init_image_texture(t_data *data, t_xpm *texture, char *file);
 int     is_all_spaces_or_newline(t_path *path);
+void    init_img_xpm(t_xpm **texture, t_path *path, char *file);
+int     int_line(t_path **path, int i);
+int     is_a_direction(char c);
 
 /* rendering */
 t_pixel pixel(int x, int y, int size, int color);

@@ -6,7 +6,7 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 17:41:40 by macbookpro        #+#    #+#             */
-/*   Updated: 2024/04/12 17:43:46 by macbookpro       ###   ########.fr       */
+/*   Updated: 2024/04/12 18:07:11 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,39 @@ void init_path(t_path *path)
     path->map_array = NULL;
     path->split = NULL;
     path->rgb = NULL;
+}
+
+void init_img_xpm(t_xpm **texture, t_path *path, char *file)
+{
+    int len;
+
+    len = ft_strlen(file);
+    if (file[len -1] == '\n')
+        file[len - 1] = '\0';
+    (*texture)->img = mlx_xpm_file_to_image(path->mlx, file,
+        &(*texture)->width, &(*texture)->height);
+    if ((*texture)->img == NULL)
+        error_path(path, "Error\nInvalid (*texture)\n");
+    (*texture)->addr = mlx_get_data_addr((*texture)->img, &(*texture)->bpp,
+        &(*texture)->size_line, &(*texture)->endian);
+    (*texture)->texture = (int *)mlx_get_data_addr((*texture)->img, &(*texture)->bpp,
+        &(*texture)->size_line, &(*texture)->endian);
+}
+
+int int_line(t_path **path, int i)
+{
+    if ((*path)->line[i] == '1' || (*path)->line[i] == '0')
+        return((*path)->line[i] - '0');
+    else if (is_a_direction((*path)->line[i]))
+    {
+        (*path)->player_orientation = (*path)->line[i];
+        return (2);
+    }
+    else if ((*path)->line[i] == ' ' || (*path)->line[i] == '\t')
+        return (-1);
+    else
+    {
+        error_path(*path, "Error\nInvalid map\n");
+        return (-1);
+    }
 }

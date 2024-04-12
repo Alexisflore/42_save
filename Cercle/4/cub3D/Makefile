@@ -24,6 +24,7 @@ SRC_FILES	:=	main.c \
 				get_next_line/get_next_line_utils.c \
 				parsing/test_check_args.c \
 				parsing/init_parsing_values.c \
+				parsing/handling_errors.c \
 
 OBJ_FILES		:= $(patsubst %.c,$(BUILD_DIR)/%.o,$(SRC_FILES))
 DEP_FILES		:= $(OBJ_FILES:.o=.d)
