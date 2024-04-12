@@ -6,7 +6,7 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 15:02:46 by macbookpro        #+#    #+#             */
-/*   Updated: 2024/04/12 14:39:51 by macbookpro       ###   ########.fr       */
+/*   Updated: 2024/04/12 14:49:02 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,10 +85,6 @@ void init_path(t_path *path)
     path->mlx = mlx_init();
     path->i = 0;
     path->player_orientation = 0;
-    path->so = NULL;
-    path->we = NULL;
-    path->ea = NULL;
-    path->no = NULL;
     path->floor = NULL;
     path->ceiling = NULL;
     path->map = malloc(sizeof(t_map *));
@@ -101,18 +97,6 @@ void init_path(t_path *path)
     path->textures->east = NULL;
     path->textures->north = NULL;
     path->textures->south = NULL;
-    // path->textures->west = malloc(sizeof(t_xpm));
-    // if (path->textures->west == NULL)
-    //     error_path(path, "Error\nMalloc textures west\n");
-    // path->textures->east = malloc(sizeof(t_xpm));
-    // if (path->textures->east == NULL)
-    //     error_path(path, "Error\nMalloc textures east\n");
-    // path->textures->north = malloc(sizeof(t_xpm));
-    // if (path->textures->north == NULL)
-    //     error_path(path, "Error\nMalloc textures north\n");
-    // path->textures->south = malloc(sizeof(t_xpm));
-    // if (path->textures->south == NULL)
-    //     error_path(path, "Error\nMalloc textures south\n");
     path->map->next = NULL;
     path->map->line = NULL;
     path->map_array = NULL;
@@ -136,29 +120,29 @@ void is_right_xpm_file(t_path *path, char *file)
     mlx_destroy_image(mlx, img);
 }
 
-void init_img_xpm(t_xpm *texture, t_path *path, char *file)
+void init_img_xpm(t_xpm **texture, t_path *path, char *file)
 {
     int len;
 
     len = ft_strlen(file);
     if (file[len -1] == '\n')
         file[len - 1] = '\0';
-    texture->img = mlx_xpm_file_to_image(path->mlx, file,
-        &texture->width, &texture->height);
-    if (texture->img == NULL)
-        error_path(path, "Error\nInvalid texture\n");
-    texture->addr = mlx_get_data_addr(texture->img, &texture->bpp,
-        &texture->size_line, &texture->endian);
-    texture->texture = (int *)mlx_get_data_addr(texture->img, &texture->bpp,
-        &texture->size_line, &texture->endian);
+    (*texture)->img = mlx_xpm_file_to_image(path->mlx, file,
+        &(*texture)->width, &(*texture)->height);
+    if ((*texture)->img == NULL)
+        error_path(path, "Error\nInvalid (*texture)\n");
+    (*texture)->addr = mlx_get_data_addr((*texture)->img, &(*texture)->bpp,
+        &(*texture)->size_line, &(*texture)->endian);
+    (*texture)->texture = (int *)mlx_get_data_addr((*texture)->img, &(*texture)->bpp,
+        &(*texture)->size_line, &(*texture)->endian);
 }
 
-void check_first_texture(t_xpm *texture, t_path *path)
+void check_first_texture(t_xpm **texture, t_path *path)
 {
-    if (texture != NULL)
+    if (*texture != NULL)
         error_path(path, "Error\nDuplicate texture\n");
-    texture = malloc(sizeof(t_xpm));
-    if (texture == NULL)
+    *texture = malloc(sizeof(t_xpm));
+    if (*texture == NULL)
         error_path(path, "Error\nMalloc texture\n");
     init_img_xpm(texture, path, path->split[1]);
 }
@@ -167,13 +151,13 @@ void check_texture(t_path *path)
 {
     // is_right_xpm_file(path, path->split[1]);
     if (ft_strcmp(path->split[0], "SO") == 0)
-        check_first_texture(path->textures->south, path);
+        check_first_texture(&path->textures->south, path);
     else if (ft_strcmp(path->split[0], "WE") == 0)
-        check_first_texture(path->textures->west, path);
+        check_first_texture(&path->textures->west, path);
     else if (ft_strcmp(path->split[0], "EA") == 0)
-        check_first_texture(path->textures->east, path);
+        check_first_texture(&path->textures->east, path);
     else if (ft_strcmp(path->split[0], "NO") == 0)
-        check_first_texture(path->textures->north, path);
+        check_first_texture(&path->textures->north, path);
 }
 
 void check_nbr(char *str, t_path *path, int *rgb)

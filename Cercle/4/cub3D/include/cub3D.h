@@ -6,7 +6,7 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 15:26:41 by macbookpro        #+#    #+#             */
-/*   Updated: 2024/04/12 14:38:40 by macbookpro       ###   ########.fr       */
+/*   Updated: 2024/04/12 14:48:21 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,7 +185,7 @@ void    free_char_array(char **array);
 void    error_path(t_path *path, char *message);
 void    init_path(t_path *path);
 void    is_right_xpm_file(t_path *path, char *file);
-void    check_first_texture(t_xpm *texture, t_path *path);
+void    check_first_texture(t_xpm **texture, t_path *path);
 void    check_texture(t_path *path);
 void    check_nbr(char *str, t_path *path, int *rgb);
 void    fill_rgb(t_path *path, t_rgb **rgb);
