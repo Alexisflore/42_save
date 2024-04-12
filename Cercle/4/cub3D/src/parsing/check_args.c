@@ -6,7 +6,7 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 15:02:46 by macbookpro        #+#    #+#             */
-/*   Updated: 2024/04/12 18:09:06 by macbookpro       ###   ########.fr       */
+/*   Updated: 2024/04/12 18:49:13 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ int is_all_textures(t_path *path)
     return (0);
 }
 
-
 // void init_path(t_path *path)
 // {
 //     path->mlx = mlx_init();
@@ -59,22 +58,6 @@ int is_all_textures(t_path *path)
 //     path->split = NULL;
 //     path->rgb = NULL;
 // }
-
-void is_right_xpm_file(t_path *path, char *file)
-{
-    void *img;
-    void *mlx;
-    int width;
-    int height;
-
-    img = NULL;
-    mlx = mlx_init();
-    img = mlx_xpm_file_to_image(mlx, file,
-        &width, &height);
-    if (img == NULL)
-        error_path(path, "Error\nInvalid texture\n");
-    mlx_destroy_image(mlx, img);
-}
 
 void check_first_texture(t_xpm **texture, t_path *path)
 {
@@ -206,6 +189,7 @@ void create_map(t_path *path)
     new->line[i] = '\0';
     t_map_add_back(&(path->map), new);
     free(path->line);
+    path->line = NULL;
 }
 
 int    is_texture(char *str)
@@ -362,6 +346,12 @@ void    check_textures_and_rgb(t_path *path)
     free_char_array(path->split);
 }
 
+void next_data(t_path *path, int fd)
+{
+    free(path->line);
+    path->line = get_next_line(fd);
+}
+
 void check_data(int fd, t_path *path)
 {
     path->line = get_next_line(fd);
@@ -369,34 +359,22 @@ void check_data(int fd, t_path *path)
     {
         if (is_all_spaces_or_newline(path) == 1)
         {
-            free(path->line);
-            path->line = get_next_line(fd);
+            next_data(path, fd);
             continue;
         }
         check_textures_and_rgb(path);
-        free(path->line);
-        path->line = get_next_line(fd);
+        next_data(path, fd);
     }
     while (path->line != NULL && is_all_spaces_or_newline(path) == 1)
-    {
-        free(path->line);
-        path->line = get_next_line(fd);
-    }
+        next_data(path, fd);
     while (path->line != NULL && is_all_textures(path) == 1)
     {
         create_map(path);
-        path->line = get_next_line(fd);
+        next_data(path, fd);
     }
     final_check(path);
     close(fd);
 }
-
-// void error_check(t_path *path, char *message)
-// {
-//     perror(message);
-//     free(path);
-//     exit(1);
-// }
 
 t_path *check_args(int argc, char **argv)
 {

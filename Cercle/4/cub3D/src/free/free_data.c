@@ -6,7 +6,7 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 17:10:07 by macbookpro        #+#    #+#             */
-/*   Updated: 2024/04/12 18:05:51 by macbookpro       ###   ########.fr       */
+/*   Updated: 2024/04/12 18:35:03 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,9 @@ void free_char_array(char **array)
 void free_map(t_map **map)
 {
     t_map *tmp;
-    
+
+    if (map == NULL)
+        return;
     while (*map != NULL)
     {
         tmp = *map;
