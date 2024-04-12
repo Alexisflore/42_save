@@ -6,7 +6,7 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 15:02:46 by macbookpro        #+#    #+#             */
-/*   Updated: 2024/04/12 18:55:54 by macbookpro       ###   ########.fr       */
+/*   Updated: 2024/04/12 18:57:37 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -331,6 +331,8 @@ void    final_check(t_path *path)
 {
     if (is_all_textures(path) == 0)
         error_path(path, "Error\nMissing texture\n");
+    if (path->player_orientation == 0)
+        error_path(path, "Error\nMissing player orientation\n");
     check_map(path);
 }
 
