@@ -6,7 +6,7 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 15:02:46 by macbookpro        #+#    #+#             */
-/*   Updated: 2024/04/12 10:53:22 by macbookpro       ###   ########.fr       */
+/*   Updated: 2024/04/12 14:12:09 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,6 +138,11 @@ void is_right_xpm_file(t_path *path, char *file)
 
 void init_img_xpm(t_xpm *texture, t_path *path, char *file)
 {
+    int len;
+
+    len = ft_strlen(file);
+    if (file[len -1] == '\n')
+        file[len - 1] = '\0';
     texture->img = mlx_xpm_file_to_image(path->mlx, file,
         &texture->width, &texture->height);
     if (texture->img == NULL)
@@ -174,8 +179,12 @@ void check_texture(t_path *path)
 int check_nbr(char *str, t_path *path, int *rgb)
 {
     int i;
+    int len;
 
     i = 0;
+    len = ft_strlen(str);
+    if (str[len - 1] == '\n')
+        str[len - 1] = '\0';
     if (ft_strlen(str) > 3)
         error_path(path, "Error\nInvalid RGB value\n");
     while (str[i] != '\0')
@@ -184,8 +193,6 @@ int check_nbr(char *str, t_path *path, int *rgb)
             error_path(path, "Error\nInvalid RGB value\n");
         i++;
     }
-    if (str[0] > '2' || str[1] > '5' || str[2] > '5')
-        error_path(path, "Error\nInvalid RGB value\n");
     *rgb = ft_atoi(str);
     if (*rgb < 0 || *rgb > 255)
         error_path(path, "Error\nInvalid RGB value\n");
@@ -445,6 +452,7 @@ void    check_textures_and_rgb(t_path *path)
         check_texture(path);
     else if (is_rgb(path->split[0]) == 1)
         check_rgb(path);
+    free_char_array(path->split);
 }
 
 void check_data(int fd, t_path *path)

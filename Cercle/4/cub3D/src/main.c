@@ -59,7 +59,6 @@ int	main(void)
     }
     t_data data;
     mlx_win_init(&data, worldmap);
-
     // mlx_key_hook(data.win, f, &data);
 	mlx_hook(data.win, 02, (1L<<0), player_move_with_angle, &data);
     mlx_loop(data.mlx);
