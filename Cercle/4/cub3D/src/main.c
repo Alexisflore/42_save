@@ -44,25 +44,25 @@ int	f(int keysym, t_data *data)
     return (0);
 }
 
-int	main(void)
-{
-    // check_args(argc, argv);
-    int **worldmap = malloc(sizeof(int *) * 31);
-    for (int i = 0; i < 31; i++)
-        worldmap[i] = malloc(sizeof(int) * 31);
-    for (int i = 0; i < 30; i++)
-    {
-        for (int j = 0; j < 30; j++)
-            worldmap[i][j] = worldMap[j][i];
-    }
-    t_data data;
-    mlx_win_init(&data, worldmap);
-    // mlx_key_hook(data.win, f, &data);
-    mlx_hook(data.win, KeyPress, KeyPressMask, player_move_with_angle, &data);
-    mlx_loop(data.mlx);
-    free_data(&data);
-    return (0);
-}
+// int	main(void)
+// {
+//     // check_args(argc, argv);
+//     int **worldmap = malloc(sizeof(int *) * 31);
+//     for (int i = 0; i < 31; i++)
+//         worldmap[i] = malloc(sizeof(int) * 31);
+//     for (int i = 0; i < 30; i++)
+//     {
+//         for (int j = 0; j < 30; j++)
+//             worldmap[i][j] = worldMap[j][i];
+//     }
+//     t_data data;
+//     mlx_win_init(&data, worldmap);
+//     // mlx_key_hook(data.win, f, &data);
+//     mlx_hook(data.win, KeyPress, KeyPressMask, player_move_with_angle, &data);
+//     mlx_loop(data.mlx);
+//     free_data(&data);
+//     return (0);
+// }
 
 
 

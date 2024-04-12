@@ -6,7 +6,7 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 15:02:46 by macbookpro        #+#    #+#             */
-/*   Updated: 2024/04/12 10:23:05 by macbookpro       ###   ########.fr       */
+/*   Updated: 2024/04/12 10:53:22 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,9 @@ void error_path(t_path *path, char *message)
     exit(1);
 }
 
-void init_path(t_path *path, t_data *data)
+void init_path(t_path *path)
 {
+    path->mlx = mlx_init();
     path->i = 0;
     path->player_orientation = 0;
     path->so = NULL;
@@ -90,7 +91,6 @@ void init_path(t_path *path, t_data *data)
     path->no = NULL;
     path->floor = NULL;
     path->ceiling = NULL;
-    path->data = data;
     path->map = malloc(sizeof(t_map *));
     if (path->map == NULL)
         error_path(path, "Error\nMalloc map\n");
@@ -136,6 +136,18 @@ void is_right_xpm_file(t_path *path, char *file)
     mlx_destroy_image(mlx, img);
 }
 
+void init_img_xpm(t_xpm *texture, t_path *path, char *file)
+{
+    texture->img = mlx_xpm_file_to_image(path->mlx, file,
+        &texture->width, &texture->height);
+    if (texture->img == NULL)
+        error_path(path, "Error\nInvalid texture\n");
+    texture->addr = mlx_get_data_addr(texture->img, &texture->bpp,
+        &texture->size_line, &texture->endian);
+    texture->texture = (int *)mlx_get_data_addr(texture->img, &texture->bpp,
+        &texture->size_line, &texture->endian);
+}
+
 void check_first_texture(t_xpm *texture, t_path *path)
 {
     if (texture != NULL)
@@ -143,7 +155,7 @@ void check_first_texture(t_xpm *texture, t_path *path)
     texture = malloc(sizeof(t_xpm));
     if (texture == NULL)
         error_path(path, "Error\nMalloc texture\n");
-    init_image_texture(path->data, texture, path->split[1]);
+    init_img_xpm(texture, path, path->split[1]);
 }
 
 void check_texture(t_path *path)
@@ -460,7 +472,7 @@ void error_check(t_path *path, char *message)
 }
 
 //check if the argument is a valid ".cub" file
-t_path *check_args(int argc, char **argv, t_data *data)
+t_path *check_args(int argc, char **argv)
 {
     int fd;
     t_path *path;
@@ -475,7 +487,7 @@ t_path *check_args(int argc, char **argv, t_data *data)
     fd = open(argv[1], O_RDONLY);
     if (fd == -1)
         error_check(path, "Error\nFile not found\n");
-    init_path(path, data);
+    init_path(path);
     check_data(fd, path);
     return (path);
 }

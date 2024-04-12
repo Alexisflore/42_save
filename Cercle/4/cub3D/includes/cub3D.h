@@ -6,7 +6,7 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 15:26:41 by macbookpro        #+#    #+#             */
-/*   Updated: 2024/04/12 10:21:46 by macbookpro       ###   ########.fr       */
+/*   Updated: 2024/04/12 10:54:20 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,6 +157,7 @@ typedef struct t_collision
 typedef struct t_path
 {
     t_data *data;
+    void *mlx;
     char *no;
     char *so;
     char *we;
@@ -182,7 +183,7 @@ int nbr_of_texture(t_path *path);
 void    free_intarray(int **array);
 void   free_char_array(char **array);
 void error_path(t_path *path, char *message);
-void init_path(t_path *path, t_data *data);
+void init_path(t_path *path);
 void is_right_xpm_file(t_path *path, char *file);
 void check_first_texture(t_xpm *texture, t_path *path);
 void check_texture(t_path *path);
@@ -207,7 +208,7 @@ void   check_map(t_path *path);
 void    final_check(t_path *path);
 void    check_textures_and_rgb(t_path *path);
 void check_data(int fd, t_path *path);
-t_path *check_args(int argc, char **argv, t_data *data);
+t_path *check_args(int argc, char **argv);
 void t_map_add_back(t_map **alst, t_map *new);
 void error_check(t_path *path, char *message);
 void    init_image_texture(t_data *data, t_xpm *texture, char *file);
