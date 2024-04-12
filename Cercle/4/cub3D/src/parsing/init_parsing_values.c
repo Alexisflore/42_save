@@ -6,7 +6,7 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 17:41:40 by macbookpro        #+#    #+#             */
-/*   Updated: 2024/04/12 18:07:11 by macbookpro       ###   ########.fr       */
+/*   Updated: 2024/04/12 19:19:06 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,13 @@ int int_line(t_path **path, int i)
         error_path(*path, "Error\nInvalid map\n");
         return (-1);
     }
+}
+
+void    init_tmap(t_map *new, t_path *path)
+{
+    new->next = NULL;
+    new->size = ft_strlen(path->line);
+    new->line = malloc(sizeof(int) * (new->size + 1));
+    if (new->line == NULL)
+        error_path(path, "Error\nMalloc map\n");
 }
