@@ -6,7 +6,7 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 15:02:46 by macbookpro        #+#    #+#             */
-/*   Updated: 2024/04/12 18:49:13 by macbookpro       ###   ########.fr       */
+/*   Updated: 2024/04/12 18:55:54 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -344,6 +344,7 @@ void    check_textures_and_rgb(t_path *path)
     else if (is_rgb(path->split[0]) == 1)
         check_rgb(path);
     free_char_array(path->split);
+    path->split = NULL;
 }
 
 void next_data(t_path *path, int fd)
