@@ -16,6 +16,10 @@ SRCS 		= $(addprefix $(SRCS_DIR),\
 				rendering/draw_pixels.c\
 				rendering/drawing.c\
 				move/player_move.c\
+				free/free_data.c\
+				get_next_line/get_next_line.c\
+				get_next_line/get_next_line_utils.c\
+				parsing/test_check_args.c\
 			)
 
 OBJS		= $(SRCS:.c=.o)

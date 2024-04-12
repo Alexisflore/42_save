@@ -1,8 +1,6 @@
 #include "cub3D.h"
 #include <time.h>
 
-
-
 void	put_pxl_to_img(t_data *data, int x, int y, int color)
 {
 	if (x < SIDE_LEN && y < SIDE_LEN)
@@ -36,6 +34,8 @@ int get_fps()
 t_wall *init_wall(t_data *data, t_ray *rayH, t_ray *rayV)
 {
     t_wall *wall = malloc(sizeof(t_wall));
+    if (wall == NULL)
+        exit_error("Error malloc wall\n", data);
     data->shade = 1;
     find_distT(data, rayH, rayV);
     wall->lineH = (PIXEL_SIZE * 320) / data->distT;

@@ -23,7 +23,7 @@ void init_rayH(t_ray *ray, t_data *data)
     {
         ray->rx = data->px;
         ray->ry = data->py;
-        ray->dof = 8;
+        ray->dof = data->horizon;
     }
 }
 
@@ -31,12 +31,13 @@ void check_horizontal_lines(t_data *data, t_ray *ray)
 {
     ray->disT = 1000000;
     init_rayH(ray, data);
-    while (ray->dof < 8)
+    while (ray->dof < data->horizon)
     {
         ray->mx = (int)(ray->rx) >> 6;
         ray->my = (int)(ray->ry) >> 6;
         ray->mp = ray->my * ray->mx;
-        if (ray->mx >= 0 && ray->my >= 0 && ray->mx <= data->mapX && ray->my <= data->mapY && data->map[ray->mx][ray->my] == 1)
+        if (ray->mx >= 0 && ray->my >= 0 && ray->mx <= data->mapX
+            && ray->my <= data->mapY && data->map[ray->mx][ray->my] == 1)
         {
             ray->dof = data->horizon;
             ray->disT = dist(data->px, data->py, ray->rx, ray->ry);
@@ -73,14 +74,14 @@ void init_rayV(t_ray *ray, t_data *data)
     {
         ray->rx = data->px;
         ray->ry = data->py;
-        ray->dof = 8;
+        ray->dof = data->horizon;
     }
 }
 
 void check_vertical_lines(t_data *data, t_ray *ray)
 {
     init_rayV(ray, data);
-    while (ray->dof < 8)
+    while (ray->dof < data->horizon)
     {
         ray->mx = (int)(ray->rx) >> 6;
         ray->my = (int)(ray->ry) >> 6;
@@ -88,7 +89,7 @@ void check_vertical_lines(t_data *data, t_ray *ray)
         if (ray->mx >= 0 && ray->my >= 0 && ray->mx <= data->mapX
             && ray->my <= data->mapY && data->map[ray->mx][ray->my] == 1)
         {
-            ray->dof = 8;
+            ray->dof = data->horizon;
             ray->disT = dist(data->px, data->py, ray->rx, ray->ry);
         }
         else

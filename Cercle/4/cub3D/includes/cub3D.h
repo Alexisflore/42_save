@@ -6,11 +6,12 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 15:26:41 by macbookpro        #+#    #+#             */
-/*   Updated: 2024/04/09 15:20:55 by macbookpro       ###   ########.fr       */
+/*   Updated: 2024/04/12 10:21:46 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft/libft.h"
+#include "../src/get_next_line/get_next_line.h"
 #include "../minilibx_opengl/mlx.h"
 #include <stdlib.h>
 #include <stdio.h>
@@ -87,12 +88,9 @@ typedef struct t_texture
 
 typedef struct s_map
 {
-    int **map;
-    int mapX;
-    int mapY;
-    t_texture *texture;
-    t_rgb *floor;
-    t_rgb *ceiling;
+    int *line;
+    int size;
+    struct s_map *next;
 }               t_map;
 
 typedef struct s_pixel
@@ -156,8 +154,63 @@ typedef struct t_collision
     int ipy_sub_yo;
 }               t_collision;
 
+typedef struct t_path
+{
+    t_data *data;
+    char *no;
+    char *so;
+    char *we;
+    char *ea;
+    char *s;
+    char *line;
+    char **split;
+    char **rgb;
+    int   i;
+    t_rgb *floor;
+    t_rgb *ceiling;
+    t_texture *textures;
+    t_map *map;
+    int **map_array;
+    int mapX;
+    int mapY;
+    char player_orientation;
+}               t_path;
+
 /* parsing */
-int check_args(int argc, char **argv);
+void    exit_error(char *message, t_data *data);
+int nbr_of_texture(t_path *path);
+void    free_intarray(int **array);
+void   free_char_array(char **array);
+void error_path(t_path *path, char *message);
+void init_path(t_path *path, t_data *data);
+void is_right_xpm_file(t_path *path, char *file);
+void check_first_texture(t_xpm *texture, t_path *path);
+void check_texture(t_path *path);
+int check_nbr(char *str, t_path *path, int *rgb);
+void    fill_rgb(t_path *path, t_rgb *rgb);
+void create_rgb(t_path *path, t_rgb **rgb);
+void check_rgb(t_path *path);
+void    init_tmap(t_map *new, t_path *path);
+void create_map(t_path *path);
+int    is_texture(char *str);
+int is_rgb(char *str);
+void free_map(t_map **map);
+int size_x(t_map *map);
+int max_size(t_map *map);
+void create_x_array(t_path *path, int i, int size_y);
+void test4wall(t_path *path, int i, int j);
+bool is_a_player(int c);
+void check_wall_around(t_path *path, int i, int j);
+void verify_closed_map(t_path *path);
+void create_map_array(t_path *path);
+void   check_map(t_path *path);
+void    final_check(t_path *path);
+void    check_textures_and_rgb(t_path *path);
+void check_data(int fd, t_path *path);
+t_path *check_args(int argc, char **argv, t_data *data);
+void t_map_add_back(t_map **alst, t_map *new);
+void error_check(t_path *path, char *message);
+void    init_image_texture(t_data *data, t_xpm *texture, char *file);
 
 /* rendering */
 t_pixel pixel(int x, int y, int size, int color);
@@ -185,6 +238,8 @@ bool is_wall(t_data *data, int key);
 int player_move_with_angle(int key, t_data *data);
 void    next_position(t_data *data, t_collision *col, int key);
 
+/* free */
+void    free_data(t_data *data);
 
 void    colision(t_data *data, t_collision *col);
 
