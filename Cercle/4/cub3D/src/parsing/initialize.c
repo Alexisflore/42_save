@@ -6,7 +6,7 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 17:24:18 by macbookpro        #+#    #+#             */
-/*   Updated: 2024/04/13 17:40:22 by macbookpro       ###   ########.fr       */
+/*   Updated: 2024/04/13 18:27:13 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	exit_error(char *message, t_data *data)
 {
-	perror(message);
+	ft_putstr_fd(message, 2);
 	free_path(&data->path);
 	free_data(&data);
 	exit(1);

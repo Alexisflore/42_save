@@ -6,7 +6,7 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 17:00:53 by macbookpro        #+#    #+#             */
-/*   Updated: 2024/04/13 17:55:48 by macbookpro       ###   ########.fr       */
+/*   Updated: 2024/04/13 18:27:00 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	main(void)
 	data = malloc(sizeof(t_data));
 	if (data == NULL)
 	{
-		perror("Error\nMalloc data\n");
+		ft_putstr_fd("Error\nMalloc failed\n", 2);
 		exit(1);
 	}
 	path = check_args(2, argv);
