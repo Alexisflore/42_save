@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   creates_data.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
+/*   By: ladloff <ladloff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 19:21:12 by macbookpro        #+#    #+#             */
-/*   Updated: 2024/04/13 17:42:14 by macbookpro       ###   ########.fr       */
+/*   Updated: 2024/04/14 01:45:27 by ladloff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	create_x_array(t_path *path, int i, t_map *tmp)
 	int	j;
 
 	j = 0;
-	path->map_array[i] = malloc(sizeof(int) * (path->mapx) + 1);
+	path->map_array[i] = malloc(sizeof(int) * ((path->mapx) + 1));
 	if (path->map_array[i] == NULL)
 		error_path(path, "Error\nMalloc map_array\n");
 	while (j < tmp->size)
