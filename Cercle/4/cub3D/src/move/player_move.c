@@ -117,11 +117,6 @@ int player_move_with_angle(int key, t_data *data)
         key_cam_move(key, data);
     else if (is_wall(data, key) == false)
         key_move(key, data);
-    else if (key == ESC_KEY)
-    {
-        mlx_destroy_window(data->mlx, data->win);
-        exit(0);
-    }
     drawrays3D(data);
     // pixel_drawing(data, pixel(data->px, data->py, 10, 0x00FF0000));
     return (0);
