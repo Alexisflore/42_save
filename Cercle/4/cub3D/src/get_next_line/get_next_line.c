@@ -6,7 +6,7 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 10:48:41 by alfloren          #+#    #+#             */
-/*   Updated: 2024/04/10 16:24:25 by macbookpro       ###   ########.fr       */
+/*   Updated: 2024/04/13 17:32:02 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ void	extract_line(t_list *stash, char **line)
 	while (stash)
 	{
 		j = 0;
-		// while (stash->content[j] && stash->content[j] != '\n')
 		while (stash->content[j] && stash->content[j] != '\n')
 			(*line)[i++] = stash->content[j++];
 		if (stash->content[j] == '\n')

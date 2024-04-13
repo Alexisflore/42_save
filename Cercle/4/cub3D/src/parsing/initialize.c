@@ -1,38 +1,49 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   initialize.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/13 17:24:18 by macbookpro        #+#    #+#             */
+/*   Updated: 2024/04/13 17:40:22 by macbookpro       ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3D.h"
 
-void   exit_error(char *message, t_data *data)
+void	exit_error(char *message, t_data *data)
 {
-    perror(message);
-    free_path(&data->path);
-    free_data(&data);
-    exit(1);
+	perror(message);
+	free_path(&data->path);
+	free_data(&data);
+	exit(1);
 }
 
-static int  find_horizon(t_path *path)
+static int	find_horizon(t_path *path)
 {
-    if (path->mapX < path->mapY)
-        return(path->mapY);
-    return(path->mapX);
+	if (path->mapx < path->mapy)
+		return (path->mapy);
+	return (path->mapx);
 }
 
-void    init_values(t_data *data, t_path *path)
+void	init_values(t_data *data, t_path *path)
 {
-    data->mlx = path->mlx;
-    data->mapX = path->mapX;
-    data->mapY = path->mapY;
-    data->horizon = find_horizon(path);
-    data->map = path->map_array;
-    data->px = path->player_x;
-    data->py = path->player_y;
-    data->pdx = 0;
-    data->pdy = 0;
-    data->pa = path->player_angle;
-    data->textures = path->textures;
-    data->ceiling = path->ceiling;
-    data->floor = path->floor;
-    data->path = path;
+	data->mlx = path->mlx;
+	data->mapx = path->mapx;
+	data->mapy = path->mapy;
+	data->horizon = find_horizon(path);
+	data->map = path->map_array;
+	data->px = path->player_x;
+	data->py = path->player_y;
+	data->pdx = 0;
+	data->pdy = 0;
+	data->pa = path->player_angle;
+	data->textures = path->textures;
+	data->ceiling = path->ceiling;
+	data->floor = path->floor;
+	data->path = path;
 }
-
 
 // void    init_image_texture(t_data *data, t_xpm *texture, char *file)
 // {
@@ -71,14 +82,9 @@ void    init_values(t_data *data, t_path *path)
 
 void	mlx_win_init(t_data *data, t_path *path)
 {
-    init_values(data, path);
-	data->win = mlx_new_window(data->mlx,SIDE_LEN,320, "cub3D");
-	data->img = mlx_new_image(data->mlx,SIDE_LEN,320);
-	data->img_ptr = mlx_get_data_addr(data->img,
-			&data->bpp, &data->sl, &data->endian);
-    // malloc_textures(data);
-    // init_image_texture(data, data->textures->west, "textures/west.xpm");
-    // init_image_texture(data, data->textures->east, "textures/east.xpm");
-    // init_image_texture(data, data->textures->north, "textures/north.xpm");
-    // init_image_texture(data, data->textures->south, "textures/south.xpm");
+	init_values(data, path);
+	data->win = mlx_new_window(data->mlx, SIDE_LEN, 320, "cub3D");
+	data->img = mlx_new_image(data->mlx, SIDE_LEN, 320);
+	data->img_ptr = mlx_get_data_addr(data->img, &data->bpp, &data->sl,
+			&data->endian);
 }

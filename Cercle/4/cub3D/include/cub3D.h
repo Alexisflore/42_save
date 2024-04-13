@@ -6,7 +6,7 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 15:26:41 by macbookpro        #+#    #+#             */
-/*   Updated: 2024/04/13 17:02:06 by macbookpro       ###   ########.fr       */
+/*   Updated: 2024/04/13 17:39:47 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@
 #define SUCCESS 0
 #define FAILURE 1
 #define PI 3.14159265359
-#define P2 PI / 2
-#define P3 3 * PI / 2
+#define P2 1.5708
+#define P3 4.71239
 #define DR 0.00174533
 #define PIXEL_SIZE 64
 #define PIXEL_TEXTURE 64
@@ -53,8 +53,8 @@ typedef struct t_wall
 	double			tx;
 	double			ty;
 	double			ty_step;
-	double			lineOff;
-	double			lineH;
+	double			lineoff;
+	double			lineh;
 	double			color;
 }					t_wall;
 
@@ -113,7 +113,7 @@ typedef struct s_ray
 	double			ra;
 	double			xo;
 	double			yo;
-	double			disT;
+	double			dist;
 }					t_ray;
 
 typedef struct t_path
@@ -128,8 +128,8 @@ typedef struct t_path
 	t_texture		*textures;
 	t_map			*map;
 	int				**map_array;
-	int				mapX;
-	int				mapY;
+	int				mapx;
+	int				mapy;
 	char			player_orientation;
 	int				player_x;
 	int				player_y;
@@ -146,8 +146,8 @@ typedef struct s_data
 	int				sl;
 	int				endian;
 	int				**map;
-	int				mapX;
-	int				mapY;
+	int				mapx;
+	int				mapy;
 	int				horizon;
 	double			px;
 	double			py;
@@ -155,7 +155,7 @@ typedef struct s_data
 	double			pdy;
 	double			pa;
 	t_ray			*ray;
-	double			distT;
+	double			dist;
 	double			shade;
 	t_texture		*textures;
 	t_xpm			*texture;
@@ -225,22 +225,22 @@ void				delete_newline(char ***array);
 /* rendering */
 t_pixel				pixel(int x, int y, int size, int color);
 void				pixel_drawing(t_data *data, t_pixel pix);
-void				draw_line(t_data *data, int x1, int y1, int x2, int y2,
-						int color);
+// void				draw_line(t_data *data, int x1, int y1, int x2, int y2,
+// 						int color);
 void				draw_floor_and_ceiling(t_data *data);
-void				drawrays3D(t_data *data);
+void				drawrays_3d(t_data *data);
 void				mlx_win_init(t_data *data, t_path *path);
 void				put_pxl_to_img(t_data *data, int x, int y, int color);
-void				draw3Dwall(t_data *data, t_ray *rayH, t_ray *rayV);
+void				draw_3d_wall(t_data *data, t_ray *rayH, t_ray *rayV);
 void				find_angle(t_ray *rayH, t_ray *rayV);
 void				check_vertical_lines(t_data *data, t_ray *ray);
-void				init_rayV(t_ray *ray, t_data *data);
+void				init_rayv(t_ray *ray, t_data *data);
 void				check_horizontal_lines(t_data *data, t_ray *ray);
-void				init_rayH(t_ray *ray, t_data *data);
+void				init_rayh(t_ray *ray, t_data *data);
 void				draw_ray(t_data *data, t_ray *rayH, t_ray *rayV, int color);
 double				dist(double x1, double y1, double x2, double y2);
-int					convertRGBtoHex(t_rgb *rgb);
-void				find_distT(t_data *data, t_ray *rayH, t_ray *rayV);
+int					convert_rgb_to_hex(t_rgb *rgb);
+void				find_dist_t(t_data *data, t_ray *rayH, t_ray *rayV);
 int					get_fps(void);
 void				drawmap(t_data *data);
 

@@ -6,64 +6,64 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 15:02:46 by macbookpro        #+#    #+#             */
-/*   Updated: 2024/04/12 19:28:08 by macbookpro       ###   ########.fr       */
+/*   Updated: 2024/04/13 17:16:22 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void    final_check(t_path *path)
+void	final_check(t_path *path)
 {
-    if (is_all_textures(path) == 0)
-        error_path(path, "Error\nMissing texture\n");
-    if (path->player_orientation == 0)
-        error_path(path, "Error\nMissing player orientation\n");
-    check_map(path);
-    create_final_map(path);
+	if (is_all_textures(path) == 0)
+		error_path(path, "Error\nMissing texture\n");
+	if (path->player_orientation == 0)
+		error_path(path, "Error\nMissing player orientation\n");
+	check_map(path);
+	create_final_map(path);
 }
 
-void check_data(int fd, t_path *path)
+void	check_data(int fd, t_path *path)
 {
-    path->line = get_next_line(fd);
-    while (path->line != NULL && is_all_textures(path) == 0)
-    {
-        if (is_all_spaces_or_newline(path) == 1)
-        {
-            next_data(path, fd);
-            continue;
-        }
-        check_textures_and_rgb(path);
-        next_data(path, fd);
-    }
-    while (path->line != NULL && is_all_spaces_or_newline(path) == 1)
-        next_data(path, fd);
-    while (path->line != NULL && is_all_textures(path) == 1)
-    {
-        create_map(path);
-        next_data(path, fd);
-    }
-    final_check(path);
-    close(fd);
+	path->line = get_next_line(fd);
+	while (path->line != NULL && is_all_textures(path) == 0)
+	{
+		if (is_all_spaces_or_newline(path) == 1)
+		{
+			next_data(path, fd);
+			continue ;
+		}
+		check_textures_and_rgb(path);
+		next_data(path, fd);
+	}
+	while (path->line != NULL && is_all_spaces_or_newline(path) == 1)
+		next_data(path, fd);
+	while (path->line != NULL && is_all_textures(path) == 1)
+	{
+		create_map(path);
+		next_data(path, fd);
+	}
+	final_check(path);
+	close(fd);
 }
 
-t_path *check_args(int argc, char **argv)
+t_path	*check_args(int argc, char **argv)
 {
-    int fd;
-    t_path *path;
+	int		fd;
+	t_path	*path;
 
-    path = malloc(sizeof(t_path));
-    if (path == NULL)
-        error_check(path, "Error\nMalloc path\n");
-    if (argc != 2)
-        error_check(path, "Error\nInvalid number of arguments\n");
-    if (ft_strncmp(argv[1] + ft_strlen(argv[1]) - 4, ".cub", 4) != 0)
-        error_check(path, "Error\nInvalid file extension\n");
-    fd = open(argv[1], O_RDONLY);
-    if (fd == -1)
-        error_check(path, "Error\nFile not found\n");
-    init_path(path);
-    check_data(fd, path);
-    return (path);
+	path = malloc(sizeof(t_path));
+	if (path == NULL)
+		error_check(path, "Error\nMalloc path\n");
+	if (argc != 2)
+		error_check(path, "Error\nInvalid number of arguments\n");
+	if (ft_strncmp(argv[1] + ft_strlen(argv[1]) - 4, ".cub", 4) != 0)
+		error_check(path, "Error\nInvalid file extension\n");
+	fd = open(argv[1], O_RDONLY);
+	if (fd == -1)
+		error_check(path, "Error\nFile not found\n");
+	init_path(path);
+	check_data(fd, path);
+	return (path);
 }
 
 // void t_map_add_back(t_map **alst, t_map *new)
@@ -73,14 +73,13 @@ t_path *check_args(int argc, char **argv)
 //     if (*alst == NULL)
 //     {
 //         *alst = new;
-//         return;
+//         return ;
 //     }
 //     tmp = alst;
 //     while ((*tmp)->next != NULL)
 //         tmp = &(*tmp)->next;
 //     (*tmp)->next = new;
 // }
-
 
 // void init_path(t_path *path)
 // {
@@ -388,5 +387,3 @@ t_path *check_args(int argc, char **argv)
 //     free(path->line);
 //     path->line = get_next_line(fd);
 // }
-
-

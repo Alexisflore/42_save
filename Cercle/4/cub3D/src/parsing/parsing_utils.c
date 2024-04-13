@@ -6,69 +6,69 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 19:18:28 by macbookpro        #+#    #+#             */
-/*   Updated: 2024/04/12 19:28:51 by macbookpro       ###   ########.fr       */
+/*   Updated: 2024/04/13 17:24:33 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void t_map_add_back(t_map **alst, t_map *new)
+void	t_map_add_back(t_map **alst, t_map *new)
 {
-    t_map **tmp;
+	t_map	**tmp;
 
-    if (*alst == NULL)
-    {
-        *alst = new;
-        return;
-    }
-    tmp = alst;
-    while ((*tmp)->next != NULL)
-        tmp = &(*tmp)->next;
-    (*tmp)->next = new;
+	if (*alst == NULL)
+	{
+		*alst = new;
+		return ;
+	}
+	tmp = alst;
+	while ((*tmp)->next != NULL)
+		tmp = &(*tmp)->next;
+	(*tmp)->next = new;
 }
 
-int size_x(t_map *map)
+int	size_x(t_map *map)
 {
-    int size;
-    t_map *tmp;
+	int		size;
+	t_map	*tmp;
 
-    tmp = map;
-    size = 0;
-    while (tmp != NULL)
-    {
-        size++;
-        tmp = tmp->next;
-    }
-    return (size);
+	tmp = map;
+	size = 0;
+	while (tmp != NULL)
+	{
+		size++;
+		tmp = tmp->next;
+	}
+	return (size);
 }
 
-int max_size(t_path *path, t_map *map)
+int	max_size(t_path *path, t_map *map)
 {
-    int max;
-    t_map *tmp;
+	int		max;
+	t_map	*tmp;
 
-    if (map == NULL)
-        error_path(path, "Error\nEmpty map\n");
-    tmp = map;
-    max = 0;
-    while (tmp->next != NULL)
-    {
-        if (tmp->size > max)
-            max = tmp->size;
-        tmp = tmp->next;
-    }
-    return (max);
+	if (map == NULL)
+		error_path(path, "Error\nEmpty map\n");
+	tmp = map;
+	max = 0;
+	while (tmp->next != NULL)
+	{
+		if (tmp->size > max)
+			max = tmp->size;
+		tmp = tmp->next;
+	}
+	return (max);
 }
 
-void next_data(t_path *path, int fd)
+void	next_data(t_path *path, int fd)
 {
-    free(path->line);
-    path->line = get_next_line(fd);
+	free(path->line);
+	path->line = get_next_line(fd);
 }
 
-void    fill_rgb(t_path *path, t_rgb **rgb)
+void	fill_rgb(t_path *path, t_rgb **rgb)
 {
-    check_nbr(path->rgb[0], path, &(*rgb)->r);
-    check_nbr(path->rgb[1], path, &(*rgb)->g);
-    check_nbr(path->rgb[2], path, &(*rgb)->b);
+	check_nbr(path->rgb[0], path, &(*rgb)->r);
+	check_nbr(path->rgb[1], path, &(*rgb)->g);
+	check_nbr(path->rgb[2], path, &(*rgb)->b);
 }

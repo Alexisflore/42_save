@@ -6,7 +6,7 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 16:26:30 by macbookpro        #+#    #+#             */
-/*   Updated: 2024/04/13 17:04:41 by macbookpro       ###   ########.fr       */
+/*   Updated: 2024/04/13 17:22:30 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,6 @@ int	player_move_with_angle(int key, t_data *data)
 		key_cam_move(key, data);
 	else if (is_wall(data, key) == false)
 		key_move(key, data);
-	drawrays3D(data);
+	drawrays_3d(data);
 	return (0);
 }

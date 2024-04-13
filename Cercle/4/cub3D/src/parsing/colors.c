@@ -1,7 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   colors.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/13 17:17:02 by macbookpro        #+#    #+#             */
+/*   Updated: 2024/04/13 17:17:59 by macbookpro       ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3D.h"
 
-int convertRGBtoHex(t_rgb *rgb)
+int	convert_rgb_to_hex(t_rgb *rgb)
 {
-    //return the hex value wiht 100% opacity
-    return (rgb->r << 16 | rgb->g << 8 | rgb->b);
+	return (rgb->r << 16 | rgb->g << 8 | rgb->b);
 }
