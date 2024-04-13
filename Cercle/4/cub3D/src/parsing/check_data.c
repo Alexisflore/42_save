@@ -6,7 +6,7 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 19:12:31 by macbookpro        #+#    #+#             */
-/*   Updated: 2024/04/12 19:16:17 by macbookpro       ###   ########.fr       */
+/*   Updated: 2024/04/13 09:40:05 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ void check_rgb(t_path *path)
     path->rgb = ft_split(path->split[1], ',');
     if (path->rgb == NULL)
         error_path(path, "Error\nMalloc RGB\n");
+    if (array_size(path->rgb) != 3)
+        error_path(path, "Error\nWrong rgb argument");
     if (ft_strcmp(path->split[0], "F") == 0)
         create_rgb(path, &path->floor);
     else if (ft_strcmp(path->split[0], "C") == 0)

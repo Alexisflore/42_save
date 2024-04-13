@@ -29,6 +29,7 @@ SRC_FILES	:=	main.c \
 				parsing/check_data.c \
 				parsing/check_data1.c \
 				parsing/parsing_utils.c \
+				parsing/parsing_utils1.c \
 				parsing/creates_data.c \
 
 OBJ_FILES		:= $(patsubst %.c,$(BUILD_DIR)/%.o,$(SRC_FILES))
