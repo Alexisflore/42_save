@@ -14,11 +14,11 @@ SO textures/south.xpm
 
 
 
-EA textures/east.xpm                                          
+EA 		textures/east.xpm                                          
 
 
 
- F         0,153,262
+ F         0,153,255
 
 
 
