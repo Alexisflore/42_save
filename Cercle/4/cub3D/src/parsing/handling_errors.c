@@ -6,7 +6,7 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 17:55:00 by macbookpro        #+#    #+#             */
-/*   Updated: 2024/04/13 17:23:47 by macbookpro       ###   ########.fr       */
+/*   Updated: 2024/04/13 17:46:27 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,14 @@ void	free_path(t_path **path)
 
 void	error_path(t_path *path, char *message)
 {
-	perror(message);
+	ft_putstr_fd(message, 2);
 	free_path(&path);
 	exit(1);
 }
 
 void	error_check(t_path *path, char *message)
 {
-	perror(message);
+	ft_putstr_fd(message, 2);
 	free(path);
 	exit(1);
 }
