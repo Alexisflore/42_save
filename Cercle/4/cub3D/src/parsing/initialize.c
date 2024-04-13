@@ -3,6 +3,7 @@
 void   exit_error(char *message, t_data *data)
 {
     perror(message);
+    free_path(&data->path);
     free_data(data);
     exit(1);
 }
@@ -28,6 +29,7 @@ void    init_values(t_data *data, t_path *path)
     data->textures = path->textures;
     data->ceiling = path->ceiling;
     data->floor = path->floor;
+    data->path = path;
 }
 
 

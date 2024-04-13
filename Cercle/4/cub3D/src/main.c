@@ -64,6 +64,7 @@ int	main(void)
 	mlx_hook(data.win, 02, (1L<<0), player_move_with_angle, &data);
     mlx_loop(data.mlx);
     free_data(&data);
+    free_path(&path);
     return (0);
 }
 

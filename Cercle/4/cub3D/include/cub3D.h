@@ -6,7 +6,7 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 15:26:41 by macbookpro        #+#    #+#             */
-/*   Updated: 2024/04/13 08:56:12 by macbookpro       ###   ########.fr       */
+/*   Updated: 2024/04/13 09:16:05 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,26 @@ typedef struct s_ray
     double disT;
 }               t_ray;
 
+typedef struct t_path
+{
+    void *mlx;
+    char *s;
+    char *line;
+    char **split;
+    char **rgb;
+    t_rgb *floor;
+    t_rgb *ceiling;
+    t_texture *textures;
+    t_map *map;
+    int **map_array;
+    int mapX;
+    int mapY;
+    char player_orientation;
+    int player_x;
+    int player_y;
+    double player_angle;
+}               t_path;
+
 typedef struct	s_data
 {
     void	*mlx;
@@ -141,6 +161,7 @@ typedef struct	s_data
     t_xpm *texture;
     t_rgb   *floor;
     t_rgb   *ceiling;
+    t_path  *path;
 }				t_data;
 
 
@@ -156,26 +177,6 @@ typedef struct t_collision
     int ipy_sub_yo;
 }               t_collision;
 
-typedef struct t_path
-{
-    t_data *data;
-    void *mlx;
-    char *s;
-    char *line;
-    char **split;
-    char **rgb;
-    t_rgb *floor;
-    t_rgb *ceiling;
-    t_texture *textures;
-    t_map *map;
-    int **map_array;
-    int mapX;
-    int mapY;
-    char player_orientation;
-    int player_x;
-    int player_y;
-    double player_angle;
-}               t_path;
 
 /* parsing */
 void    exit_error(char *message, t_data *data);
@@ -217,6 +218,7 @@ int     is_a_direction(char c);
 void    next_data(t_path *path, int fd);
 void    create_final_map(t_path *path);
 void    initial_position(t_path *path, int x, int y, char c);
+void    free_path(t_path **path);
 
 /* rendering */
 t_pixel pixel(int x, int y, int size, int color);
