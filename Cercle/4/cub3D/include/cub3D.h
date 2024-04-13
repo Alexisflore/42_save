@@ -6,7 +6,7 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 15:26:41 by macbookpro        #+#    #+#             */
-/*   Updated: 2024/04/13 08:48:05 by macbookpro       ###   ########.fr       */
+/*   Updated: 2024/04/13 08:56:12 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -240,8 +240,8 @@ int     get_fps(void);
 void    drawmap(t_data *data);
 
 /* move */
-bool is_wall(t_data *data, int key);
-int player_move_with_angle(int key, t_data *data);
+bool    is_wall(t_data *data, int key);
+int     player_move_with_angle(int key, t_data *data);
 void    next_position(t_data *data, t_collision *col, int key);
 
 /* free */

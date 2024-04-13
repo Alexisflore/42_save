@@ -47,7 +47,7 @@ int	f(int keysym, t_data *data)
 
 int	main(void)
 {
-    char *argv[] = {"./cub3D", "valid.cub"};
+    char *argv[] = {"./cub3D", "cub/valid.cub"};
     t_path *path;
     path = check_args(2, argv);
     // int **worldmap = malloc(sizeof(int *) * 31);
