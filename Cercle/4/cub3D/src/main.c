@@ -6,7 +6,7 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 17:00:53 by macbookpro        #+#    #+#             */
-/*   Updated: 2024/04/13 18:27:00 by macbookpro       ###   ########.fr       */
+/*   Updated: 2024/04/13 18:29:51 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,11 @@ int	close_window_event(t_data *data)
 
 int	main(void)
 {
-	char	*argv[] = {"./cub3D", "cub/valid.cub"};
+	char	*argv[2];
 	t_path	*path;
 	t_data	*data;
 
+	argv[1] = "cub/valid.cub";
 	data = malloc(sizeof(t_data));
 	if (data == NULL)
 	{
