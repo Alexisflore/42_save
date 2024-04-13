@@ -17,6 +17,7 @@ static int  find_horizon(t_path *path)
 
 void    init_values(t_data *data, t_path *path)
 {
+    data->mlx = path->mlx;
     data->mapX = path->mapX;
     data->mapY = path->mapY;
     data->horizon = find_horizon(path);
@@ -71,7 +72,6 @@ void    init_values(t_data *data, t_path *path)
 void	mlx_win_init(t_data *data, t_path *path)
 {
     init_values(data, path);
-	data->mlx = mlx_init();
 	data->win = mlx_new_window(data->mlx,SIDE_LEN,320, "cub3D");
 	data->img = mlx_new_image(data->mlx,SIDE_LEN,320);
 	data->img_ptr = mlx_get_data_addr(data->img,

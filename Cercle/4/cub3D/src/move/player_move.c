@@ -108,6 +108,8 @@ int player_move_with_angle(int key, t_data *data)
     // next_position(data, &col, key);
     if (key == ESC_KEY)
     {
+        free_path(&data->path);
+        free_data(data);
         mlx_destroy_window(data->mlx, data->win);
         exit(0);
     }
