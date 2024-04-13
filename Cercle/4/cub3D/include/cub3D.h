@@ -6,7 +6,7 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 15:26:41 by macbookpro        #+#    #+#             */
-/*   Updated: 2024/04/13 09:35:36 by macbookpro       ###   ########.fr       */
+/*   Updated: 2024/04/13 10:52:16 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -220,6 +220,7 @@ void    create_final_map(t_path *path);
 void    initial_position(t_path *path, int x, int y, char c);
 void    free_path(t_path **path);
 int     array_size(char **array);
+void    delete_newline(char ***array);
 
 /* rendering */
 t_pixel pixel(int x, int y, int size, int color);

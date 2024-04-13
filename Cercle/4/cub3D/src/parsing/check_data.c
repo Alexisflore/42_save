@@ -6,7 +6,7 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 19:12:31 by macbookpro        #+#    #+#             */
-/*   Updated: 2024/04/13 09:40:05 by macbookpro       ###   ########.fr       */
+/*   Updated: 2024/04/13 10:50:33 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,8 @@ void check_texture(t_path *path)
 void check_nbr(char *str, t_path *path, int *rgb)
 {
     int i;
-    int len;
 
     i = 0;
-    len = ft_strlen(str);
-    if (str[len - 1] == '\n')
-        str[len - 1] = '\0';
     if (ft_strlen(str) > 3)
         error_path(path, "Error\nInvalid RGB value\n");
     while (str[i] != '\0')

@@ -6,7 +6,7 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 19:16:58 by macbookpro        #+#    #+#             */
-/*   Updated: 2024/04/13 09:38:12 by macbookpro       ###   ########.fr       */
+/*   Updated: 2024/04/13 10:52:33 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void    check_textures_and_rgb(t_path *path)
     path->split = ft_split(path->line, ' ');
     if (path->split == NULL)
         error_path(path, "Error\nMalloc split\n");
+    delete_newline(&path->split);
     if (array_size(path->split) != 2)
         error_path(path, "Error\nWrong arguments");
     if (is_texture(path->split[0]) == 1)

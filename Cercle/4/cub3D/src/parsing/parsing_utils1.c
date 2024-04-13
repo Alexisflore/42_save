@@ -6,7 +6,7 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 09:32:32 by macbookpro        #+#    #+#             */
-/*   Updated: 2024/04/13 09:35:16 by macbookpro       ###   ########.fr       */
+/*   Updated: 2024/04/13 10:52:24 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,30 @@ int array_size(char **array)
     while(array[size] != NULL)
         size++;
     return(size);
+}
+
+void delete_newline(char ***array)
+{
+    int i;
+    int j;
+
+    i = 0;
+    while ((*array)[i] != NULL)
+    {
+        j = 0;
+        while ((*array)[i][j] != '\0')
+        {
+            if ((*array)[i][j] == '\n')
+                (*array)[i][j] = '\0';
+            j++;
+        }
+        i++;
+    }
+    i = 0;
+    while ((*array)[i] != NULL)
+    {
+        if ((*array)[i][0] == '\0')
+            (*array)[i] = NULL;
+        i++;
+    }
 }

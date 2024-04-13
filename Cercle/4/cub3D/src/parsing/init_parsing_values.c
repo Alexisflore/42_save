@@ -6,7 +6,7 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 17:41:40 by macbookpro        #+#    #+#             */
-/*   Updated: 2024/04/12 19:47:31 by macbookpro       ###   ########.fr       */
+/*   Updated: 2024/04/13 10:53:57 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,6 @@ void init_path(t_path *path)
 
 void init_img_xpm(t_xpm **texture, t_path *path, char *file)
 {
-    int len;
-
-    len = ft_strlen(file);
-    if (file[len -1] == '\n')
-        file[len - 1] = '\0';
     (*texture)->img = mlx_xpm_file_to_image(path->mlx, file,
         &(*texture)->width, &(*texture)->height);
     if ((*texture)->img == NULL)
