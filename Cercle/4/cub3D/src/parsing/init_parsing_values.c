@@ -6,7 +6,7 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 17:41:40 by macbookpro        #+#    #+#             */
-/*   Updated: 2024/04/12 19:19:06 by macbookpro       ###   ########.fr       */
+/*   Updated: 2024/04/12 19:47:31 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void init_path(t_path *path)
 {
     path->mlx = mlx_init();
-    path->i = 0;
     path->player_orientation = 0;
     path->floor = NULL;
     path->ceiling = NULL;

@@ -1,7 +1,7 @@
 #include "cub3D.h"
 
-int convertRGBtoHex(int r, int g, int b)
+int convertRGBtoHex(t_rgb *rgb)
 {
     //return the hex value wiht 100% opacity
-    return (r << 16 | g << 8 | b);
+    return (rgb->r << 16 | rgb->g << 8 | rgb->b);
 }

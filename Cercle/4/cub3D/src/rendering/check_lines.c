@@ -36,8 +36,8 @@ void check_horizontal_lines(t_data *data, t_ray *ray)
         ray->mx = (int)(ray->rx) >> 6;
         ray->my = (int)(ray->ry) >> 6;
         ray->mp = ray->my * ray->mx;
-        if (ray->mx >= 0 && ray->my >= 0 && ray->mx <= data->mapX
-            && ray->my <= data->mapY && data->map[ray->mx][ray->my] == 1)
+        if (ray->mx >= 0 && ray->my >= 0 && ray->mx < data->mapX
+            && ray->my < data->mapY && data->map[ray->my][ray->mx] == 1)
         {
             ray->dof = data->horizon;
             ray->disT = dist(data->px, data->py, ray->rx, ray->ry);
@@ -86,8 +86,8 @@ void check_vertical_lines(t_data *data, t_ray *ray)
         ray->mx = (int)(ray->rx) >> 6;
         ray->my = (int)(ray->ry) >> 6;
         ray->mp = ray->my * ray->mx;
-        if (ray->mx >= 0 && ray->my >= 0 && ray->mx <= data->mapX
-            && ray->my <= data->mapY && data->map[ray->mx][ray->my] == 1)
+        if (ray->mx >= 0 && ray->my >= 0 && ray->mx < data->mapX
+            && ray->my < data->mapY && data->map[ray->my][ray->mx] == 1)
         {
             ray->dof = data->horizon;
             ray->disT = dist(data->px, data->py, ray->rx, ray->ry);

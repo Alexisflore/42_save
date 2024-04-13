@@ -6,7 +6,7 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 15:26:41 by macbookpro        #+#    #+#             */
-/*   Updated: 2024/04/12 19:30:13 by macbookpro       ###   ########.fr       */
+/*   Updated: 2024/04/13 08:48:05 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,6 +139,8 @@ typedef struct	s_data
     double  shade;
     t_texture *textures;
     t_xpm *texture;
+    t_rgb   *floor;
+    t_rgb   *ceiling;
 }				t_data;
 
 
@@ -158,15 +160,10 @@ typedef struct t_path
 {
     t_data *data;
     void *mlx;
-    char *no;
-    char *so;
-    char *we;
-    char *ea;
     char *s;
     char *line;
     char **split;
     char **rgb;
-    int   i;
     t_rgb *floor;
     t_rgb *ceiling;
     t_texture *textures;
@@ -175,6 +172,9 @@ typedef struct t_path
     int mapX;
     int mapY;
     char player_orientation;
+    int player_x;
+    int player_y;
+    double player_angle;
 }               t_path;
 
 /* parsing */
@@ -184,7 +184,6 @@ void    free_intarray(int **array);
 void    free_char_array(char **array);
 void    error_path(t_path *path, char *message);
 void    init_path(t_path *path);
-void    is_right_xpm_file(t_path *path, char *file);
 void    check_first_texture(t_xpm **texture, t_path *path);
 void    check_texture(t_path *path);
 void    check_nbr(char *str, t_path *path, int *rgb);
@@ -217,6 +216,7 @@ int     int_line(t_path **path, int i);
 int     is_a_direction(char c);
 void    next_data(t_path *path, int fd);
 void    create_final_map(t_path *path);
+void    initial_position(t_path *path, int x, int y, char c);
 
 /* rendering */
 t_pixel pixel(int x, int y, int size, int color);
@@ -224,7 +224,7 @@ void    pixel_drawing(t_data *data, t_pixel pix);
 void    draw_line(t_data *data, int x1, int y1, int x2, int y2, int color);
 void    draw_floor_and_ceiling(t_data *data);
 void    drawrays3D(t_data *data);
-void    mlx_win_init(t_data *data, int **worldmap);
+void    mlx_win_init(t_data *data, t_path *path);
 void    put_pxl_to_img(t_data *data, int x, int y, int color);
 void    draw3Dwall(t_data *data, t_ray *rayH, t_ray *rayV);
 void    find_angle(t_ray *rayH, t_ray *rayV);
@@ -234,7 +234,7 @@ void    check_horizontal_lines(t_data *data, t_ray *ray);
 void    init_rayH(t_ray *ray, t_data *data);
 void    draw_ray(t_data *data, t_ray *rayH, t_ray *rayV, int color);
 double  dist(double x1, double y1, double x2, double y2);
-int     convertRGBtoHex(int r, int g, int b);
+int     convertRGBtoHex(t_rgb *rgb);
 void    find_distT(t_data *data, t_ray *rayH, t_ray *rayV);
 int     get_fps(void);
 void    drawmap(t_data *data);

@@ -6,7 +6,7 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 19:16:58 by macbookpro        #+#    #+#             */
-/*   Updated: 2024/04/12 19:24:22 by macbookpro       ###   ########.fr       */
+/*   Updated: 2024/04/12 19:42:18 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,18 @@ void verify_closed_map(t_path *path)
         }
         i++;
     }
+}
+
+void initial_position(t_path *path, int x, int y, char c)
+{
+    path->player_x = 64 * x + 32;
+    path->player_y = 64 * y + 32;
+    if (c == 'N')
+        path->player_angle = P3;
+    else if (c == 'S')
+        path->player_angle = PI / 2;
+    else if (c == 'W')
+        path->player_angle = PI;
+    else if (c == 'E')
+        path->player_angle = 0;
 }

@@ -7,18 +7,20 @@ void   exit_error(char *message, t_data *data)
     exit(1);
 }
 
-void    init_values(t_data *data, int **worldmap)
+void    init_values(t_data *data, t_path *path)
 {
-    data->mapX = 30;
-    data->mapY = 30;
+    data->mapX = path->mapX;
+    data->mapY = path->mapY;
     data->horizon = 30;
-    data->map = worldmap;
-    data->px = PIXEL_SIZE + 1;
-    data->py = PIXEL_SIZE + 1;
+    data->map = path->map_array;
+    data->px = path->player_x;
+    data->py = path->player_y;
     data->pdx = 0;
     data->pdy = 0;
-    data->pa = PI / 2;
-    data->textures = NULL;
+    data->pa = path->player_angle;
+    data->textures = path->textures;
+    data->ceiling = path->ceiling;
+    data->floor = path->floor;
 }
 
 void    init_image_texture(t_data *data, t_xpm *texture, char *file)
@@ -56,17 +58,17 @@ void malloc_textures(t_data *data)
         exit_error("Error textures south malloc\n", data);
 }
 
-void	mlx_win_init(t_data *data, int **worldmap)
+void	mlx_win_init(t_data *data, t_path *path)
 {
-    init_values(data, worldmap);
+    init_values(data, path);
 	data->mlx = mlx_init();
 	data->win = mlx_new_window(data->mlx,SIDE_LEN,320, "cub3D");
 	data->img = mlx_new_image(data->mlx,SIDE_LEN,320);
 	data->img_ptr = mlx_get_data_addr(data->img,
 			&data->bpp, &data->sl, &data->endian);
-    malloc_textures(data);
-    init_image_texture(data, data->textures->west, "textures/west.xpm");
-    init_image_texture(data, data->textures->east, "textures/east.xpm");
-    init_image_texture(data, data->textures->north, "textures/north.xpm");
-    init_image_texture(data, data->textures->south, "textures/south.xpm");
+    // malloc_textures(data);
+    // init_image_texture(data, data->textures->west, "textures/west.xpm");
+    // init_image_texture(data, data->textures->east, "textures/east.xpm");
+    // init_image_texture(data, data->textures->north, "textures/north.xpm");
+    // init_image_texture(data, data->textures->south, "textures/south.xpm");
 }

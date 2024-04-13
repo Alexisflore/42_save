@@ -6,7 +6,7 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 19:21:12 by macbookpro        #+#    #+#             */
-/*   Updated: 2024/04/12 19:31:05 by macbookpro       ###   ########.fr       */
+/*   Updated: 2024/04/12 19:46:33 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ void create_x_array(t_path *path, int i, t_map *tmp)
     while (j < tmp->size)
     {
         path->map_array[i][j] = tmp->line[j];
+        if (tmp->line[j] == 2)
+            initial_position(path, j, i, path->player_orientation);
         j++;
     }
     while (j < path->mapX)

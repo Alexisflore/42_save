@@ -24,9 +24,9 @@ void draw_floor_and_ceiling(t_data *data)
         while (y < SIDE_LEN)
         {
             if (y < 160 && x < 600)
-                put_pxl_to_img(data, x, y, convertRGBtoHex(0, 153, 255));
+                put_pxl_to_img(data, x, y, convertRGBtoHex(data->floor));
             else if (y >= 160 && y < 320 && x < 600)
-                put_pxl_to_img(data, x, y, convertRGBtoHex(153, 102, 0));
+                put_pxl_to_img(data, x, y, convertRGBtoHex(data->ceiling));
             y++;
         }
         x++;

@@ -50,8 +50,8 @@ bool    is_wall(t_data *data, int key)
     double x = data->px;
     double y = data->py;
     init_x_y_wall(data, &x, &y, key);
-    if (data->map[(int)(x / PIXEL_SIZE)][(int)(y / PIXEL_SIZE)] == 1
-        || data->map[(int)((x + 10)/PIXEL_SIZE)][(int)((y + 10)/ PIXEL_SIZE)] == 1)
+    if (data->map[(int)(y / PIXEL_SIZE)][(int)(x / PIXEL_SIZE)] == 1
+        || data->map[(int)((y + 10)/PIXEL_SIZE)][(int)((x + 10)/ PIXEL_SIZE)] == 1)
         return (true);
     return (false);
 }
