@@ -6,7 +6,7 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 17:10:07 by macbookpro        #+#    #+#             */
-/*   Updated: 2024/04/12 18:35:03 by macbookpro       ###   ########.fr       */
+/*   Updated: 2024/04/13 09:21:59 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void    free_texture(t_xpm *data)
     free(data->img);
     free(data);
 }
+
 void    free_data(t_data *data)
 {
     free(data->mlx);
