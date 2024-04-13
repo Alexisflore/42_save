@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alfloren <alfloren@student.42.fr>          +#+  +:+       +#+        */
+/*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 15:05:53 by alfloren          #+#    #+#             */
-/*   Updated: 2023/11/17 12:26:10 by alfloren         ###   ########.fr       */
+/*   Updated: 2024/04/13 15:56:19 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,16 @@ int	countwords(const char *s, char c)
 	i = 0;
 	if (!s)
 		return (-1);
-	if (s[i] != c && s[i] && s)
+	if (s[i] != c && s[i] && s && s[i] != '\t')
+		sum++;
 	{
 		sum++;
 		i++;
 	}
 	while (s[i] && s)
 	{
-		if (s[i] != c && s[i - 1] == c)
+		if ((s[i] != c || s[i] != '\t')
+			&& (s[i - 1] == c || s[i - 1] == '\t'))
 			sum++;
 		i++;
 	}
@@ -42,7 +44,7 @@ int	longword(const char *s, char c)
 	int	i;
 
 	i = 0;
-	while (s[i] && s[i] != c)
+	while (s[i] && s[i] != c && s[i] != '\t')
 		i++;
 	return (i);
 }
@@ -75,13 +77,13 @@ char	**ft_split(char const *s, char c)
 	k = 0;
 	while (++i < ft_strlen(s))
 	{
-		if (s[i] != c)
+		if (s[i] != c && s[i] != '\t')
 		{
 			split[k] = malloc(sizeof(char) * (1 + longword(s + i, c)));
 			if (!split[k])
 				return (free_split(split));
 			j = 0;
-			while (s[i] != c && s[i])
+			while (s[i] && s[i] != c && s[i] != '\t')
 				split[k][j++] = s[i++];
 			split[k++][j] = 0;
 		}

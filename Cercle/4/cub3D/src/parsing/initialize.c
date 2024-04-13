@@ -4,7 +4,7 @@ void   exit_error(char *message, t_data *data)
 {
     perror(message);
     free_path(&data->path);
-    free_data(data);
+    free_data(&data);
     exit(1);
 }
 
