@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_move.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
+/*   By: ladloff <ladloff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 16:26:30 by macbookpro        #+#    #+#             */
-/*   Updated: 2024/04/13 17:22:30 by macbookpro       ###   ########.fr       */
+/*   Updated: 2024/04/14 02:04:00 by ladloff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ int	player_move_with_angle(int key, t_data *data)
 	if (key == ESC_KEY)
 	{
 		free_path(&data->path);
-		free_data(&data);
+		free_data(data);
 		exit(0);
 	}
 	else if (key == KEY_CAM_LEFT || key == KEY_CAM_RIGHT)

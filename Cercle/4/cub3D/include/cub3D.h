@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
+/*   By: ladloff <ladloff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 15:26:41 by macbookpro        #+#    #+#             */
-/*   Updated: 2024/04/13 17:39:47 by macbookpro       ###   ########.fr       */
+/*   Updated: 2024/04/14 02:03:21 by ladloff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -250,6 +250,6 @@ int					player_move_with_angle(int key, t_data *data);
 void				next_position(t_data *data, t_collision *col, int key);
 
 /* free */
-void				free_data(t_data **data);
+void				free_data(t_data *data);
 
 void				colision(t_data *data, t_collision *col);

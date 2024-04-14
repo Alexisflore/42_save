@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
+/*   By: ladloff <ladloff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 17:10:07 by macbookpro        #+#    #+#             */
-/*   Updated: 2024/04/13 17:06:50 by macbookpro       ###   ########.fr       */
+/*   Updated: 2024/04/14 02:02:47 by ladloff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,14 @@ void	free_texture(t_xpm **data)
 	*data = NULL;
 }
 
-void	free_data(t_data **data)
+void	free_data(t_data *data)
 {
-	if ((*data) == NULL)
+	if (data == NULL)
 		return ;
-	mlx_destroy_window((*data)->mlx, (*data)->win);
-	free((*data)->mlx);
-	free((*data)->img);
-	free((*data)->img_ptr);
-	free((*data));
-	*data = NULL;
+	mlx_destroy_window(data->mlx, data->win);
+	free(data->mlx);
+	free(data->img);
+	free(data->img_ptr);
 }
 
 void	free_intarray(int **array)
