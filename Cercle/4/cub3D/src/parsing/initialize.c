@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ladloff <ladloff@student.42.fr>            +#+  +:+       +#+        */
+/*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 17:24:18 by macbookpro        #+#    #+#             */
-/*   Updated: 2024/04/14 02:44:01 by ladloff          ###   ########.fr       */
+/*   Updated: 2024/04/14 13:38:26 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	init_values(t_data *data, t_path *path)
 	data->px = path->player_x;
 	data->py = path->player_y;
 	data->pdx = 0;
-	data->pdy = 0;
+	data->pdy = -10;
 	data->pa = path->player_angle;
 	data->textures = path->textures;
 	data->ceiling = path->ceiling;
