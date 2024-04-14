@@ -6,7 +6,7 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 17:41:40 by macbookpro        #+#    #+#             */
-/*   Updated: 2024/04/14 10:59:49 by macbookpro       ###   ########.fr       */
+/*   Updated: 2024/04/14 11:07:46 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	init_path(t_data *data, t_path *path)
 	path->line = NULL;
 	path->mlx = mlx_init();
 	if (path->mlx == NULL)
-		error_path(data, path, "Error\nInvalid mlx\n");
+		error_path(data, path, "Error\nMlx init\n");
 }
 
 void	init_img_xpm(t_xpm **texture, t_data *data, t_path *path, char *file)
