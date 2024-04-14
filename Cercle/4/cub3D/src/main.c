@@ -6,7 +6,7 @@
 /*   By: ladloff <ladloff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 17:00:53 by macbookpro        #+#    #+#             */
-/*   Updated: 2024/04/14 02:03:45 by ladloff          ###   ########.fr       */
+/*   Updated: 2024/04/14 02:15:05 by ladloff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,7 @@ int	main(void)
 	mlx_win_init(&data, path);
 	drawrays_3d(&data);
 	mlx_hook(data.win, 02, (1L << 0), player_move_with_angle, &data);
-	mlx_hook(data.win, 17, (1L << 17),
-		close_window_event, data.mlx);
+	mlx_hook(data.win, 17, (1L << 17), close_window_event, &data);
 	mlx_loop(data.mlx);
 	free_path(&path);
 	free_data(&data);
