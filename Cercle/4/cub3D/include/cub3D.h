@@ -6,47 +6,54 @@
 /*   By: ladloff <ladloff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 15:26:41 by macbookpro        #+#    #+#             */
-/*   Updated: 2024/04/14 03:03:04 by ladloff          ###   ########.fr       */
+/*   Updated: 2024/04/14 13:38:03 by ladloff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
-#include "libft.h"
-#include "mlx.h"
-#include <errno.h>
-#include <fcntl.h>
-#include <math.h>
-#include <stdbool.h>
-#include <stdio.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdlib.h>
-#include <string.h>
-#include <sys/stat.h>
-#include <sys/types.h>
-#include <unistd.h>
-// # include <X11/keysym.h>
-// # include <X11/X.h>
+#ifndef CUB3D_H
+# define CUB3D_H
 
-#define MALLOC_ERROR 1
-#define SIDE_LEN 600
-#define ESC_KEY 53
-#define KEY_UP 13
-#define KEY_DOWN 1
-#define KEY_LEFT 0
-#define KEY_RIGHT 2
+# include "get_next_line.h"
+# include "libft.h"
+# include "mlx.h"
+# include <errno.h>
+# include <fcntl.h>
+# include <math.h>
+# include <stdbool.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <string.h>
+# include <sys/stat.h>
+# include <sys/types.h>
+# include <unistd.h>
+# ifdef __linux__
+#  include <X11/keysym.h>
+# endif
 
-#define KEY_CAM_LEFT 123
-#define KEY_CAM_RIGHT 124
+# define MALLOC_ERROR 1
+# define SIDE_LEN 600
 
-#define SUCCESS 0
-#define FAILURE 1
-#define PI 3.14159265359
-#define P2 1.5708
-#define P3 4.71239
-#define DR 0.00174533
-#define PIXEL_SIZE 64
-#define PIXEL_TEXTURE 64
+# define PI 3.14159265359
+# define P2 1.5708
+# define P3 4.71239
+# define DR 0.00174533
+# define PIXEL_SIZE 64
+# define PIXEL_TEXTURE 64
+
+# ifdef __APPLE__
+
+typedef enum e_apple_key
+{
+	APPLE_KEY_A = 0,
+	APPLE_KEY_S = 1,
+	APPLE_KEY_D = 2,
+	APPLE_KEY_W = 13,
+	APPLE_KEY_ESCAPE = 53,
+	APPLE_KEY_LEFT = 123,
+	APPLE_KEY_RIGHT = 124,
+}					t_apple_key;
+
+# endif
 
 typedef struct t_wall
 {
@@ -248,11 +255,13 @@ int					get_fps(void);
 void				drawmap(t_data *data);
 
 /* move */
-bool				is_wall(t_data *data, int key);
-int					player_move_with_angle(int key, t_data *data);
 void				next_position(t_data *data, t_collision *col, int key);
 
 /* free */
 void				free_data(t_data *data);
 
 void				colision(t_data *data, t_collision *col);
+
+int					player_move_with_angle(int key, t_data *data);
+
+#endif

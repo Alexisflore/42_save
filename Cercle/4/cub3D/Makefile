@@ -18,7 +18,6 @@ SRC_FILES	:=	main.c \
 				rendering/check_lines.c \
 				rendering/draw_pixels.c \
 				rendering/drawing.c \
-				move/player_move.c \
 				free/free_data.c \
 				free/free_data2.c \
 				get_next_line/get_next_line.c \
@@ -32,6 +31,8 @@ SRC_FILES	:=	main.c \
 				parsing/parsing_utils.c \
 				parsing/parsing_utils1.c \
 				parsing/creates_data.c \
+				hooks/keypress_linux.c \
+				hooks/keypress_macos.c \
 
 OBJ_FILES		:= $(patsubst %.c,$(BUILD_DIR)/%.o,$(SRC_FILES))
 DEP_FILES		:= $(OBJ_FILES:.o=.d)
