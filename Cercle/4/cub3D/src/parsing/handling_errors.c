@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handling_errors.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ladloff <ladloff@student.42.fr>            +#+  +:+       +#+        */
+/*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 17:55:00 by macbookpro        #+#    #+#             */
-/*   Updated: 2024/04/14 03:15:55 by ladloff          ###   ########.fr       */
+/*   Updated: 2024/04/14 08:07:31 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,9 @@ void	free_path(t_data *data, t_path *path)
 	free(path->ceiling);
 	free_map(path->map);
 	free_intarray(path->map_array);
+	free_char_array(path->split);
+	free_char_array(path->rgb);
+	free(path->line);
 	free(path);
 }
 

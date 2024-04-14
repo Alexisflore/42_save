@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_data1.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ladloff <ladloff@student.42.fr>            +#+  +:+       +#+        */
+/*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 19:16:58 by macbookpro        #+#    #+#             */
-/*   Updated: 2024/04/14 03:14:27 by ladloff          ###   ########.fr       */
+/*   Updated: 2024/04/14 08:05:45 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	check_textures_and_rgb(t_data *data, t_path *path)
 	else if (is_rgb(path->split[0]) == 1)
 		check_rgb(data, path);
 	free_char_array(path->split);
+	path->split = NULL;
 }
 
 void	check_map(t_data *data, t_path *path)
