@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ladloff <ladloff@student.42.fr>            +#+  +:+       +#+        */
+/*   By: alfloren <alfloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 15:26:41 by macbookpro        #+#    #+#             */
-/*   Updated: 2024/04/14 14:41:40 by ladloff          ###   ########.fr       */
+/*   Updated: 2024/04/14 18:34:43 by alfloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -231,6 +231,7 @@ void				initial_position(t_path *path, int x, int y, char c);
 void				free_path(t_data *data, t_path *path);
 int					array_size(char **array);
 void				delete_newline(char ***array);
+char				**ft_split_space(char const *s);
 
 /* rendering */
 t_pixel				pixel(int x, int y, int size, int color);

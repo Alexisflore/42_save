@@ -22,7 +22,7 @@ SRC_FILES	:=	main.c \
 				free/free_data2.c \
 				get_next_line/get_next_line.c \
 				get_next_line/get_next_line_utils.c \
-				parsing/test_check_args.c \
+				parsing/split_spaces.c \
 				parsing/init_parsing_values.c \
 				parsing/handling_errors.c \
 				parsing/boolean_test.c \

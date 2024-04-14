@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_data1.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
+/*   By: alfloren <alfloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 19:16:58 by macbookpro        #+#    #+#             */
-/*   Updated: 2024/04/14 11:39:33 by macbookpro       ###   ########.fr       */
+/*   Updated: 2024/04/14 18:35:08 by alfloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	check_textures_and_rgb(t_data *data, t_path *path)
 {
-	path->split = ft_split(path->line, ' ');
+	path->split = ft_split_space(path->line);
 	if (path->split == NULL)
 		error_path(data, path, "Error\nMalloc split\n");
 	delete_newline(&path->split);
