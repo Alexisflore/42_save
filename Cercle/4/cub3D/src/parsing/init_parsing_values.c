@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   init_parsing_values.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
+/*   By: ladloff <ladloff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 17:41:40 by macbookpro        #+#    #+#             */
-/*   Updated: 2024/04/13 17:24:03 by macbookpro       ###   ########.fr       */
+/*   Updated: 2024/04/14 02:50:38 by ladloff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void	init_path(t_path *path)
+void	init_path(t_data *data, t_path *path)
 {
 	path->mlx = mlx_init();
 	path->player_orientation = 0;
@@ -21,7 +21,7 @@ void	init_path(t_path *path)
 	path->map = NULL;
 	path->textures = malloc(sizeof(t_texture));
 	if (path->textures == NULL)
-		error_path(path, "Error\nMalloc textures\n");
+		error_path(data, path, "Error\nMalloc textures\n");
 	path->textures->west = NULL;
 	path->textures->east = NULL;
 	path->textures->north = NULL;
@@ -31,19 +31,19 @@ void	init_path(t_path *path)
 	path->rgb = NULL;
 }
 
-void	init_img_xpm(t_xpm **texture, t_path *path, char *file)
+void	init_img_xpm(t_xpm **texture, t_data *data, t_path *path, char *file)
 {
 	(*texture)->img = mlx_xpm_file_to_image(path->mlx, file, &(*texture)->width,
 			&(*texture)->height);
 	if ((*texture)->img == NULL)
-		error_path(path, "Error\nInvalid (*texture)\n");
+		error_path(data, path, "Error\nInvalid (*texture)\n");
 	(*texture)->addr = mlx_get_data_addr((*texture)->img, &(*texture)->bpp,
 			&(*texture)->size_line, &(*texture)->endian);
 	(*texture)->texture = (int *)mlx_get_data_addr((*texture)->img,
 			&(*texture)->bpp, &(*texture)->size_line, &(*texture)->endian);
 }
 
-int	int_line(t_path **path, int i)
+int	int_line(t_data *data, t_path **path, int i)
 {
 	if ((*path)->line[i] == '1' || (*path)->line[i] == '0')
 		return ((*path)->line[i] - '0');
@@ -56,16 +56,16 @@ int	int_line(t_path **path, int i)
 		return (-1);
 	else
 	{
-		error_path(*path, "Error\nInvalid map\n");
+		error_path(data, *path, "Error\nInvalid map\n");
 		return (-1);
 	}
 }
 
-void	init_tmap(t_map *new, t_path *path)
+void	init_tmap(t_data *data, t_map *new, t_path *path)
 {
 	new->next = NULL;
 	new->size = ft_strlen(path->line);
 	new->line = malloc(sizeof(int) * (new->size + 1));
 	if (new->line == NULL)
-		error_path(path, "Error\nMalloc map\n");
+		error_path(data, path, "Error\nMalloc map\n");
 }

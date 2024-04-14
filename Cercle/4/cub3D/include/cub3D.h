@@ -6,7 +6,7 @@
 /*   By: ladloff <ladloff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 15:26:41 by macbookpro        #+#    #+#             */
-/*   Updated: 2024/04/14 02:03:21 by ladloff          ###   ########.fr       */
+/*   Updated: 2024/04/14 03:03:04 by ladloff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,44 +181,47 @@ void				exit_error(char *message, t_data *data);
 int					is_all_textures(t_path *path);
 void				free_intarray(int **array);
 void				free_char_array(char **array);
-void				free_texture(t_xpm **data);
-void				error_path(t_path *path, char *message);
-void				init_path(t_path *path);
-void				check_first_texture(t_xpm **texture, t_path *path);
-void				check_texture(t_path *path);
-void				check_nbr(char *str, t_path *path, int *rgb);
-void				fill_rgb(t_path *path, t_rgb **rgb);
-void				create_rgb(t_path *path, t_rgb **rgb);
-void				check_rgb(t_path *path);
-void				init_tmap(t_map *new, t_path *path);
-void				create_map(t_path *path);
+void				free_texture(t_data *data, t_xpm *xpm);
+void				error_path(t_data *data, t_path *path, char *message);
+void				init_path(t_data *data, t_path *path);
+void				check_first_texture(t_data *data, t_xpm **texture,
+						t_path *path);
+void				check_texture(t_data *data, t_path *path);
+void				check_nbr(t_data *data, char *str, t_path *path, int *rgb);
+void				fill_rgb(t_data *data, t_path *path, t_rgb **rgb);
+void				create_rgb(t_data *data, t_path *path, t_rgb **rgb);
+void				check_rgb(t_data *data, t_path *path);
+void				init_tmap(t_data *data, t_map *new, t_path *path);
+void				create_map(t_data *data, t_path *path);
 int					is_texture(char *str);
 int					is_rgb(char *str);
-void				free_map(t_map **map);
+void				free_map(t_map *map);
 int					size_x(t_map *map);
-int					max_size(t_path *path, t_map *map);
-void				create_x_array(t_path *path, int i, t_map *map);
-void				test4wall(t_path *path, int i, int j);
-void				check_wall_around(t_path *path, int i, int j);
-void				verify_closed_map(t_path *path);
-void				create_map_array(t_path *path);
-void				check_map(t_path *path);
-void				final_check(t_path *path);
-void				check_textures_and_rgb(t_path *path);
-void				check_data(int fd, t_path *path);
-t_path				*check_args(int argc, char **argv);
+int					max_size(t_data *data, t_path *path, t_map *map);
+void				create_x_array(t_data *data, t_path *path, int i,
+						t_map *tmp);
+void				test4wall(t_data *data, t_path *path, int i, int j);
+void				check_wall_around(t_data *data, t_path *path, int i, int j);
+void				verify_closed_map(t_data *data, t_path *path);
+void				create_map_array(t_data *data, t_path *path);
+void				check_map(t_data *data, t_path *path);
+void				final_check(t_data *data, t_path *path);
+void				check_textures_and_rgb(t_data *data, t_path *path);
+void				check_data(int fd, t_data *data, t_path *path);
+t_path				*check_args(int argc, char **argv, t_data *data);
 void				t_map_add_back(t_map **alst, t_map *new);
 void				error_check(t_path *path, char *message);
 void				init_image_texture(t_data *data, t_xpm *texture,
 						char *file);
 int					is_all_spaces_or_newline(t_path *path);
-void				init_img_xpm(t_xpm **texture, t_path *path, char *file);
-int					int_line(t_path **path, int i);
+void				init_img_xpm(t_xpm **texture, t_data *data, t_path *path,
+						char *file);
+int					int_line(t_data *data, t_path **path, int i);
 int					is_a_direction(char c);
 void				next_data(t_path *path, int fd);
 void				create_final_map(t_path *path);
 void				initial_position(t_path *path, int x, int y, char c);
-void				free_path(t_path **path);
+void				free_path(t_data *data, t_path *path);
 int					array_size(char **array);
 void				delete_newline(char ***array);
 

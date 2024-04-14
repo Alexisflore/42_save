@@ -6,30 +6,66 @@
 /*   By: ladloff <ladloff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 17:10:07 by macbookpro        #+#    #+#             */
-/*   Updated: 2024/04/14 02:02:47 by ladloff          ###   ########.fr       */
+/*   Updated: 2024/04/14 03:11:02 by ladloff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void	free_texture(t_xpm **data)
+#ifdef __linux__
+
+void	cleanup_mlx(t_data *data)
 {
-	if (*data == NULL)
+	if (!data)
 		return ;
-	free((*data)->addr);
-	free((*data)->img);
-	free(*data);
-	*data = NULL;
+	if (data->img)
+		mlx_destroy_image(data->mlx, data->img);
+	if (data->win)
+		mlx_destroy_window(data->mlx, data->win);
+	if (data->mlx)
+	{
+		mlx_loop_end(data->mlx);
+		mlx_destroy_display(data->mlx);
+		free(data->mlx);
+	}
+}
+
+#elif __APPLE__
+
+/**
+ * Avoid the usage of mlx_loop_end and mlx_destroy_display
+ * Because we use the OpenGL Lib and these functions aren't present
+ */
+void	cleanup_mlx(t_data *data)
+{
+	if (!data)
+		return ;
+	if (data->img)
+		mlx_destroy_image(data->mlx, data->img);
+	if (data->win)
+		mlx_destroy_window(data->mlx, data->win);
+	if (data->mlx)
+		free(data->mlx);
+}
+
+#endif
+
+void	free_texture(t_data *data, t_xpm *xpm)
+{
+	if (xpm == NULL)
+		return ;
+	// free(data->addr);
+	if (xpm->img)
+		mlx_destroy_image(data->mlx, xpm->img);
+	free(xpm);
 }
 
 void	free_data(t_data *data)
 {
 	if (data == NULL)
 		return ;
-	mlx_destroy_window(data->mlx, data->win);
-	free(data->mlx);
-	free(data->img);
-	free(data->img_ptr);
+	cleanup_mlx(data);
+	// free(data->img_ptr);
 }
 
 void	free_intarray(int **array)
@@ -61,21 +97,20 @@ void	free_char_array(char **array)
 		i++;
 	}
 	free(array);
-	array = NULL;
 }
 
-void	free_map(t_map **map)
+void	free_map(t_map *map)
 {
 	t_map	*tmp;
 
 	if (map == NULL)
 		return ;
-	while (*map != NULL)
+	while (map != NULL)
 	{
-		tmp = *map;
-		*map = (*map)->next;
+		tmp = map;
+		map = map->next;
 		free(tmp->line);
 		free(tmp);
 	}
-	free(*map);
+	free(map);
 }

@@ -6,7 +6,7 @@
 /*   By: ladloff <ladloff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 16:26:30 by macbookpro        #+#    #+#             */
-/*   Updated: 2024/04/14 02:04:00 by ladloff          ###   ########.fr       */
+/*   Updated: 2024/04/14 02:44:11 by ladloff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ int	player_move_with_angle(int key, t_data *data)
 {
 	if (key == ESC_KEY)
 	{
-		free_path(&data->path);
+		free_path(data, data->path);
 		free_data(data);
 		exit(0);
 	}

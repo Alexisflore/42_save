@@ -6,42 +6,43 @@
 /*   By: ladloff <ladloff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 19:21:12 by macbookpro        #+#    #+#             */
-/*   Updated: 2024/04/14 01:45:27 by ladloff          ###   ########.fr       */
+/*   Updated: 2024/04/14 03:01:50 by ladloff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void	create_map_array(t_path *path)
+void	create_map_array(t_data *data, t_path *path)
 {
 	int		i;
 	t_map	*tmp;
 
 	i = 0;
-	path->mapx = max_size(path, path->map);
+	path->mapx = max_size(data, path, path->map);
 	path->mapy = size_x(path->map);
 	path->map_array = malloc(sizeof(int *) * (path->mapy + 1));
 	if (path->map_array == NULL)
-		error_path(path, "Error\nMalloc map_array\n");
+		error_path(data, path, "Error\nMalloc map_array\n");
 	tmp = path->map;
 	while (i < path->mapy)
 	{
-		create_x_array(path, i, tmp);
+		create_x_array(data, path, i, tmp);
 		tmp = tmp->next;
 		i++;
 	}
-	free_map(&path->map);
+	path->map_array[i] = NULL;
+	free_map(path->map);
 	path->map = NULL;
 }
 
-void	create_x_array(t_path *path, int i, t_map *tmp)
+void	create_x_array(t_data *data, t_path *path, int i, t_map *tmp)
 {
 	int	j;
 
 	j = 0;
 	path->map_array[i] = malloc(sizeof(int) * ((path->mapx) + 1));
 	if (path->map_array[i] == NULL)
-		error_path(path, "Error\nMalloc map_array\n");
+		error_path(data, path, "Error\nMalloc map_array\n");
 	while (j < tmp->size)
 	{
 		path->map_array[i][j] = tmp->line[j];
@@ -57,15 +58,15 @@ void	create_x_array(t_path *path, int i, t_map *tmp)
 	path->map_array[i][j] = '\0';
 }
 
-void	create_map(t_path *path)
+void	create_map(t_data *data, t_path *path)
 {
 	t_map	*new;
 	int		i;
 
 	new = malloc(sizeof(t_map));
 	if (new == NULL)
-		error_path(path, "Error\nMalloc map\n");
-	init_tmap(new, path);
+		error_path(data, path, "Error\nMalloc map\n");
+	init_tmap(data, new, path);
 	i = 0;
 	if (path->line[new->size - 1] == '\n')
 	{
@@ -74,7 +75,7 @@ void	create_map(t_path *path)
 	}
 	while (path->line[i] != '\0')
 	{
-		new->line[i] = int_line(&path, i);
+		new->line[i] = int_line(data, &path, i);
 		i++;
 	}
 	new->line[i] = '\0';
@@ -83,14 +84,14 @@ void	create_map(t_path *path)
 	path->line = NULL;
 }
 
-void	create_rgb(t_path *path, t_rgb **rgb)
+void	create_rgb(t_data *data, t_path *path, t_rgb **rgb)
 {
 	if (*rgb != NULL)
-		error_path(path, "Error\nDuplicate floor\n");
+		error_path(data, path, "Error\nDuplicate floor\n");
 	*rgb = malloc(sizeof(t_rgb));
 	if (*rgb == NULL)
-		error_path(path, "Error\nMalloc floor\n");
-	fill_rgb(path, rgb);
+		error_path(data, path, "Error\nMalloc floor\n");
+	fill_rgb(data, path, rgb);
 }
 
 void	create_final_map(t_path *path)

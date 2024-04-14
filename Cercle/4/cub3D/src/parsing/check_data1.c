@@ -3,47 +3,47 @@
 /*                                                        :::      ::::::::   */
 /*   check_data1.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
+/*   By: ladloff <ladloff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 19:16:58 by macbookpro        #+#    #+#             */
-/*   Updated: 2024/04/13 17:41:44 by macbookpro       ###   ########.fr       */
+/*   Updated: 2024/04/14 03:14:27 by ladloff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void	check_textures_and_rgb(t_path *path)
+
+void	check_textures_and_rgb(t_data *data, t_path *path)
 {
 	path->split = ft_split(path->line, ' ');
 	if (path->split == NULL)
-		error_path(path, "Error\nMalloc split\n");
+		error_path(data, path, "Error\nMalloc split\n");
 	delete_newline(&path->split);
 	if (array_size(path->split) != 2)
-		error_path(path, "Error\nWrong arguments");
+		error_path(data, path, "Error\nWrong arguments");
 	if (is_texture(path->split[0]) == 1)
-		check_texture(path);
+		check_texture(data, path);
 	else if (is_rgb(path->split[0]) == 1)
-		check_rgb(path);
+		check_rgb(data, path);
 	free_char_array(path->split);
-	path->split = NULL;
 }
 
-void	check_map(t_path *path)
+void	check_map(t_data *data, t_path *path)
 {
-	create_map_array(path);
-	verify_closed_map(path);
+	create_map_array(data, path);
+	verify_closed_map(data, path);
 }
 
-void	test4wall(t_path *path, int i, int j)
+void	test4wall(t_data *data, t_path *path, int i, int j)
 {
 	if (i == 0 || i == path->mapy - 1 || j == 0 || j == path->mapx - 1)
-		error_path(path, "Error\nMap not closed\n");
+		error_path(data, path, "Error\nMap not closed\n");
 	if (path->map_array[i - 1][j] == -1 || path->map_array[i + 1][j] == -1
 		|| path->map_array[i][j - 1] == -1 || path->map_array[i][j + 1] == -1)
-		error_path(path, "Error\nMap not closed\n");
+		error_path(data, path, "Error\nMap not closed\n");
 }
 
-void	verify_closed_map(t_path *path)
+void	verify_closed_map(t_data *data, t_path *path)
 {
 	int	i;
 	int	j;
@@ -54,7 +54,7 @@ void	verify_closed_map(t_path *path)
 		j = 0;
 		while (j < path->mapx)
 		{
-			check_wall_around(path, i, j);
+			check_wall_around(data, path, i, j);
 			j++;
 		}
 		i++;

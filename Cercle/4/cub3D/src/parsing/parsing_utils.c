@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
+/*   By: ladloff <ladloff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 19:18:28 by macbookpro        #+#    #+#             */
-/*   Updated: 2024/04/13 17:24:33 by macbookpro       ###   ########.fr       */
+/*   Updated: 2024/04/14 02:59:06 by ladloff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,13 @@ int	size_x(t_map *map)
 	return (size);
 }
 
-int	max_size(t_path *path, t_map *map)
+int	max_size(t_data *data, t_path *path, t_map *map)
 {
 	int		max;
 	t_map	*tmp;
 
 	if (map == NULL)
-		error_path(path, "Error\nEmpty map\n");
+		error_path(data, path, "Error\nEmpty map\n");
 	tmp = map;
 	max = 0;
 	while (tmp->next != NULL)
@@ -66,9 +66,9 @@ void	next_data(t_path *path, int fd)
 	path->line = get_next_line(fd);
 }
 
-void	fill_rgb(t_path *path, t_rgb **rgb)
+void	fill_rgb(t_data *data, t_path *path, t_rgb **rgb)
 {
-	check_nbr(path->rgb[0], path, &(*rgb)->r);
-	check_nbr(path->rgb[1], path, &(*rgb)->g);
-	check_nbr(path->rgb[2], path, &(*rgb)->b);
+	check_nbr(data, path->rgb[0], path, &(*rgb)->r);
+	check_nbr(data, path->rgb[1], path, &(*rgb)->g);
+	check_nbr(data, path->rgb[2], path, &(*rgb)->b);
 }
