@@ -6,7 +6,7 @@
 /*   By: ladloff <ladloff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 15:26:41 by macbookpro        #+#    #+#             */
-/*   Updated: 2024/04/14 13:38:03 by ladloff          ###   ########.fr       */
+/*   Updated: 2024/04/14 14:41:40 by ladloff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,7 +148,7 @@ typedef struct s_data
 	void			*mlx;
 	void			*win;
 	void			*img;
-	char			*img_ptr;
+	char			*addr;
 	int				bpp;
 	int				sl;
 	int				endian;

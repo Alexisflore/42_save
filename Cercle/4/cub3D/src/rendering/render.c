@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
+/*   By: ladloff <ladloff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 17:28:26 by macbookpro        #+#    #+#             */
-/*   Updated: 2024/04/13 17:36:51 by macbookpro       ###   ########.fr       */
+/*   Updated: 2024/04/14 14:44:27 by ladloff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,28 +18,9 @@ void	put_pxl_to_img(t_data *data, int x, int y, int color)
 	if (x < SIDE_LEN && y < SIDE_LEN)
 	{
 		color = mlx_get_color_value(data->mlx, color);
-		ft_memcpy(data->img_ptr + 4 * SIDE_LEN * y + x * 4, &color,
+		ft_memcpy(data->addr + 4 * SIDE_LEN * y + x * 4, &color,
 			sizeof(int));
 	}
-}
-
-int	get_fps(void)
-{
-	static int		fps = 0;
-	static clock_t	time = 0;
-	static clock_t	old_time = 0;
-	static int		frames = 0;
-	static int		old_frames = 0;
-
-	time = clock();
-	if (time - old_time > CLOCKS_PER_SEC)
-	{
-		fps = frames - old_frames;
-		old_time = time;
-		old_frames = frames;
-	}
-	frames++;
-	return (fps);
 }
 
 t_wall	*init_wall(t_data *data, t_ray *rayH, t_ray *rayV)
