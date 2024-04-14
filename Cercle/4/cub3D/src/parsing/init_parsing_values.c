@@ -6,7 +6,7 @@
 /*   By: ladloff <ladloff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 17:41:40 by macbookpro        #+#    #+#             */
-/*   Updated: 2024/04/14 02:50:38 by ladloff          ###   ########.fr       */
+/*   Updated: 2024/04/14 10:50:51 by ladloff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 void	init_path(t_data *data, t_path *path)
 {
 	path->mlx = mlx_init();
+	if (path->mlx == NULL)
+		error_path(data, path, "Error\nMlx init\n");
 	path->player_orientation = 0;
 	path->floor = NULL;
 	path->ceiling = NULL;
