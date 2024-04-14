@@ -6,7 +6,7 @@
 /*   By: ladloff <ladloff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 12:50:36 by ladloff           #+#    #+#             */
-/*   Updated: 2024/04/14 13:37:24 by ladloff          ###   ########.fr       */
+/*   Updated: 2024/04/14 12:00:22 by ladloff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,4 +113,3 @@ int	player_move_with_angle(int key, t_data *data)
 }
 
 #endif
-
