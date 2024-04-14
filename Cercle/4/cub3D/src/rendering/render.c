@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
+/*   By: ladloff <ladloff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 17:28:26 by macbookpro        #+#    #+#             */
-/*   Updated: 2024/04/13 17:36:51 by macbookpro       ###   ########.fr       */
+/*   Updated: 2024/04/14 14:41:58 by ladloff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	put_pxl_to_img(t_data *data, int x, int y, int color)
 	if (x < SIDE_LEN && y < SIDE_LEN)
 	{
 		color = mlx_get_color_value(data->mlx, color);
-		ft_memcpy(data->img_ptr + 4 * SIDE_LEN * y + x * 4, &color,
+		ft_memcpy(data->addr + 4 * SIDE_LEN * y + x * 4, &color,
 			sizeof(int));
 	}
 }
