@@ -13,11 +13,11 @@ WE         textures/west.xpm
 
 					EA 		textures/east.xpm		
 
-         F 0,153,255                   
+         F 140,140,140          
 
 
 
-C 153,102,0
+C	45,45,45
 
 
 

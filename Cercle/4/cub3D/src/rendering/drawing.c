@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   drawing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
+/*   By: alfloren <alfloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 16:17:54 by macbookpro        #+#    #+#             */
-/*   Updated: 2024/04/13 17:27:59 by macbookpro       ###   ########.fr       */
+/*   Updated: 2024/04/14 16:51:12 by alfloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ void	draw_floor_and_ceiling(t_data *data)
 		while (y < SIDE_LEN)
 		{
 			if (y < 160 && x < 600)
-				put_pxl_to_img(data, x, y, convert_rgb_to_hex(data->floor));
-			else if (y >= 160 && y < 320 && x < 600)
 				put_pxl_to_img(data, x, y, convert_rgb_to_hex(data->ceiling));
+			else if (y >= 160 && y < 320 && x < 600)
+				put_pxl_to_img(data, x, y, convert_rgb_to_hex(data->floor));
 			y++;
 		}
 		x++;

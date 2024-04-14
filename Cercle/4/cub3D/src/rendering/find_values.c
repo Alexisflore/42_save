@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_values.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
+/*   By: alfloren <alfloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 17:19:57 by macbookpro        #+#    #+#             */
-/*   Updated: 2024/04/13 17:36:11 by macbookpro       ###   ########.fr       */
+/*   Updated: 2024/04/14 17:09:41 by alfloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ void	find_dist_t(t_data *data, t_ray *rayH, t_ray *rayV)
 	{
 		data->dist = rayH->dist;
 		if (rayH->ra < PI && rayH->ra > 0)
-			data->texture = data->textures->north;
-		else
 			data->texture = data->textures->south;
+		else
+			data->texture = data->textures->north;
 	}
 	else
 	{
