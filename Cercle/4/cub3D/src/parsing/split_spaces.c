@@ -6,15 +6,16 @@
 /*   By: alfloren <alfloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 17:25:12 by macbookpro        #+#    #+#             */
-/*   Updated: 2024/04/14 18:37:10 by alfloren         ###   ########.fr       */
+/*   Updated: 2024/04/14 19:17:54 by alfloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-static int is_whitespace(char c)
+static int	is_whitespace(char c)
 {
-	return (c == ' ' || c == '\t' || c == '\n' || c == '\v' || c == '\f' || c == '\r');
+	return (c == ' ' || c == '\t' || c == '\n'
+		|| c == '\v' || c == '\f' || c == '\r');
 }
 
 static int	countwords(const char *s)
