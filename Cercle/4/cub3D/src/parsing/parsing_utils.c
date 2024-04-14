@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ladloff <ladloff@student.42.fr>            +#+  +:+       +#+        */
+/*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 19:18:28 by macbookpro        #+#    #+#             */
-/*   Updated: 2024/04/14 02:59:06 by ladloff          ###   ########.fr       */
+/*   Updated: 2024/04/14 11:48:40 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	max_size(t_data *data, t_path *path, t_map *map)
 void	next_data(t_path *path, int fd)
 {
 	free(path->line);
-	path->line = get_next_line(fd);
+	path->line = get_next_line(fd, false);
 }
 
 void	fill_rgb(t_data *data, t_path *path, t_rgb **rgb)

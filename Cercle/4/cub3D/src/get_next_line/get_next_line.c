@@ -6,18 +6,24 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 10:48:41 by alfloren          #+#    #+#             */
-/*   Updated: 2024/04/13 17:32:02 by macbookpro       ###   ########.fr       */
+/*   Updated: 2024/04/14 11:47:41 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <stdio.h>
 
-char	*get_next_line(int fd)
+char	*get_next_line(int fd, bool free_static)
 {
 	static t_list	*stash = NULL;
 	char			*line;
 
+	if (free_static == true)
+	{
+		free_stash(stash);
+		stash = NULL;
+		return (NULL);
+	}
 	line = NULL;
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, &line, 0) < 0)
 		return (NULL);

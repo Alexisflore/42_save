@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_args.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ladloff <ladloff@student.42.fr>            +#+  +:+       +#+        */
+/*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 15:02:46 by macbookpro        #+#    #+#             */
-/*   Updated: 2024/04/14 03:02:52 by ladloff          ###   ########.fr       */
+/*   Updated: 2024/04/14 11:48:50 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	final_check(t_data *data, t_path *path)
 
 void	check_data(int fd, t_data *data, t_path *path)
 {
-	path->line = get_next_line(fd);
+	path->line = get_next_line(fd, false);
 	while (path->line != NULL && is_all_textures(path) == 0)
 	{
 		if (is_all_spaces_or_newline(path) == 1)

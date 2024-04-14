@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ladloff <ladloff@student.42.fr>            +#+  +:+       +#+        */
+/*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 10:52:25 by alfloren          #+#    #+#             */
-/*   Updated: 2024/04/12 11:25:29 by ladloff          ###   ########.fr       */
+/*   Updated: 2024/04/14 11:47:59 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include "libft.h"
+# include <stdbool.h>
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 5
@@ -45,5 +46,5 @@ void	extract_line(t_list *stash, char **line);
 
 void	clean_stash(t_list **stash);
 
-char	*get_next_line(int fd);
+char	*get_next_line(int fd, bool free_static);
 #endif

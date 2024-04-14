@@ -6,7 +6,7 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 09:32:32 by macbookpro        #+#    #+#             */
-/*   Updated: 2024/04/13 17:24:49 by macbookpro       ###   ########.fr       */
+/*   Updated: 2024/04/14 11:39:20 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,10 @@ void	delete_newline(char ***array)
 	while ((*array)[i] != NULL)
 	{
 		if ((*array)[i][0] == '\0')
+		{
+			free((*array)[i]);
 			(*array)[i] = NULL;
+		}
 		i++;
 	}
 }

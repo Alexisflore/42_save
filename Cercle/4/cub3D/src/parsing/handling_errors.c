@@ -6,7 +6,7 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 17:55:00 by macbookpro        #+#    #+#             */
-/*   Updated: 2024/04/14 08:07:31 by macbookpro       ###   ########.fr       */
+/*   Updated: 2024/04/14 11:49:19 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	free_path(t_data *data, t_path *path)
 		free_texture(data, path->textures->north);
 		free_texture(data, path->textures->south);
 	}
+	get_next_line(-1, true);
 	free(path->textures);
 	free(path->floor);
 	free(path->ceiling);
