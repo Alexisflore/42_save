@@ -20,6 +20,7 @@ SRC_FILES	:=	main.c \
 				rendering/drawing.c \
 				move/player_move.c \
 				free/free_data.c \
+				free/free_data2.c \
 				get_next_line/get_next_line.c \
 				get_next_line/get_next_line_utils.c \
 				parsing/test_check_args.c \

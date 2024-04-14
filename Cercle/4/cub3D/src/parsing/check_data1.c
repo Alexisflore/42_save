@@ -6,12 +6,11 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 19:16:58 by macbookpro        #+#    #+#             */
-/*   Updated: 2024/04/14 08:05:45 by macbookpro       ###   ########.fr       */
+/*   Updated: 2024/04/14 08:17:46 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
-
 
 void	check_textures_and_rgb(t_data *data, t_path *path)
 {
