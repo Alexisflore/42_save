@@ -6,7 +6,7 @@
 /*   By: ladloff <ladloff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 17:00:53 by macbookpro        #+#    #+#             */
-/*   Updated: 2024/04/14 02:15:05 by ladloff          ###   ########.fr       */
+/*   Updated: 2024/04/14 02:21:27 by ladloff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	main(void)
 	t_path	*path;
 	t_data	data;
 
+	ft_memset(&data, 0, sizeof(t_data));
 	argv[1] = "cub/valid.cub";
 	path = check_args(2, argv);
 	mlx_win_init(&data, path);
