@@ -13,7 +13,6 @@ SRC_FILES	:=	main.c \
 				rendering/render.c \
 				parsing/colors.c \
 				parsing/initialize.c \
-				move/move.c \
 				rendering/find_values.c \
 				rendering/check_lines.c \
 				rendering/draw_pixels.c \

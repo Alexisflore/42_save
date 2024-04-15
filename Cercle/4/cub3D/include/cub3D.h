@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alfloren <alfloren@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ladloff <ladloff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 15:26:41 by macbookpro        #+#    #+#             */
 /*   Updated: 2024/04/15 11:55:27 by alfloren         ###   ########.fr       */
@@ -172,18 +172,6 @@ typedef struct s_data
 	t_path			*path;
 }					t_data;
 
-typedef struct t_collision
-{
-	int				xo;
-	int				yo;
-	int				ipx;
-	int				ipy;
-	int				ipx_add_xo;
-	int				ipx_sub_xo;
-	int				ipy_add_yo;
-	int				ipy_sub_yo;
-}					t_collision;
-
 /* parsing */
 void				exit_error(char *message, t_data *data);
 int					is_all_textures(t_path *path);
@@ -256,13 +244,8 @@ void				find_dist_t(t_data *data, t_ray *rayH, t_ray *rayV);
 int					get_fps(void);
 void				drawmap(t_data *data);
 
-/* move */
-void				next_position(t_data *data, t_collision *col, int key);
-
 /* free */
 void				free_data(t_data *data);
-
-void				colision(t_data *data, t_collision *col);
 
 int					player_move_with_angle(int key, t_data *data);
 
