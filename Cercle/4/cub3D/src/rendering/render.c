@@ -6,7 +6,7 @@
 /*   By: alfloren <alfloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 17:28:26 by macbookpro        #+#    #+#             */
-/*   Updated: 2024/04/15 14:46:57 by alfloren         ###   ########.fr       */
+/*   Updated: 2024/04/15 15:48:15 by alfloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,23 +26,22 @@ void	put_pxl_to_img(t_data *data, int x, int y, int color)
 void	put_pxl_to_720_img(t_data *data, int x, int y, int color)
 {
 	int	i;
+	int	j;
 
 	if (x < 1200 && y < HEIGHT)
 	{
-		i = 0;
 		color = mlx_get_color_value(data->mlx, color);
-		while (i < 2)
+		j = 0;
+		while (j < 2)
 		{
-			ft_memcpy(data->addr + 4 * 1200 * (y) + (x + i) * 4, &color,
-				sizeof(int));
-			i++;
-		}
-		i = 0;
-		while (i < 2)
-		{
-			ft_memcpy(data->addr + 4 * 1200 * (y + 1) + (x + i) * 4, &color,
-				sizeof(int));
-			i++;
+			i = 0;
+			while (i < 2)
+			{
+				ft_memcpy(data->addr + 4 * 1200 * (y + j) + (x + i) * 4, &color,
+					sizeof(int));
+				i++;
+			}
+			j++;
 		}
 	}
 }
