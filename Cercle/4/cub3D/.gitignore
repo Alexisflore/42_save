@@ -57,6 +57,7 @@ dkms.conf
 
 # Visual Studio Code
 .vscode
+*.json
 
 # Jetbrains
 .idea
