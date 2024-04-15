@@ -32,6 +32,8 @@ SRC_FILES	:=	main.c \
 				parsing/creates_data.c \
 				hooks/keypress_linux.c \
 				hooks/keypress_macos.c \
+				error.c \
+				init.c \
 
 OBJ_FILES		:= $(patsubst %.c,$(BUILD_DIR)/%.o,$(SRC_FILES))
 DEP_FILES		:= $(OBJ_FILES:.o=.d)

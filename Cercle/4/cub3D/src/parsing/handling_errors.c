@@ -6,7 +6,7 @@
 /*   By: ladloff <ladloff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 17:55:00 by macbookpro        #+#    #+#             */
-/*   Updated: 2024/04/15 16:20:11 by ladloff          ###   ########.fr       */
+/*   Updated: 2024/04/15 16:59:57 by ladloff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void	free_path(t_data *data, t_path *path)
 	free_char_array(path->split);
 	free_char_array(path->rgb);
 	free(path->line);
-	free(path);
 }
 
 void	error_path(t_data *data, t_path *path, char *message)

@@ -6,7 +6,7 @@
 /*   By: ladloff <ladloff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 15:26:41 by macbookpro        #+#    #+#             */
-/*   Updated: 2024/04/15 16:18:33 by ladloff          ###   ########.fr       */
+/*   Updated: 2024/04/15 16:58:14 by ladloff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,11 +169,11 @@ typedef struct s_data
 	double			dist;
 	double			shade;
 	t_mlx			mlx;
+	t_path			path;
 	t_texture		*textures;
 	t_xpm			*texture;
 	t_rgb			*floor;
 	t_rgb			*ceiling;
-	t_path			*path;
 }					t_data;
 
 /* parsing */
@@ -208,11 +208,9 @@ void				check_map(t_data *data, t_path *path);
 void				final_check(t_data *data, t_path *path);
 void				check_textures_and_rgb(t_data *data, t_path *path);
 void				check_data(int fd, t_data *data, t_path *path);
-t_path				*check_args(int argc, char **argv, t_data *data);
+t_path				check_args(char **argv, t_data *data);
 void				t_map_add_back(t_map **alst, t_map *new);
 void				error_check(t_path *path, char *message);
-void				init_image_texture(t_data *data, t_xpm *texture,
-						char *file);
 int					is_all_spaces_or_newline(t_path *path);
 void				init_img_xpm(t_xpm **texture, t_data *data, t_path *path,
 						char *file);
@@ -229,8 +227,6 @@ char				**ft_split_space(char const *s);
 /* rendering */
 t_pixel				pixel(int x, int y, int size, int color);
 void				pixel_drawing(t_data *data, t_pixel pix);
-// void				draw_line(t_data *data, int x1, int y1, int x2, int y2,
-// 						int color);
 void				draw_floor_and_ceiling(t_data *data);
 void				drawrays_3d(t_data *data);
 void				put_pxl_to_img(t_mlx *mlx, int x, int y, int color);
@@ -248,5 +244,8 @@ void				drawmap(t_data *data);
 int					player_move_with_angle(int key, t_data *data);
 
 void				cleanup_mlx(t_mlx *mlx);
+
+void				init_values(t_data *data, t_path *path);
+t_mlx				setup_mlx(char *title);
 
 #endif

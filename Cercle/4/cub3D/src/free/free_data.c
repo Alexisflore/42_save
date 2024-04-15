@@ -6,7 +6,7 @@
 /*   By: ladloff <ladloff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 17:10:07 by macbookpro        #+#    #+#             */
-/*   Updated: 2024/04/15 15:45:21 by ladloff          ###   ########.fr       */
+/*   Updated: 2024/04/15 16:51:25 by ladloff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,16 @@ void	cleanup_mlx(t_mlx *mlx)
  * Avoid the usage of mlx_loop_end and mlx_destroy_display
  * Because we use the OpenGL Lib and these functions aren't present
  */
-void	cleanup_mlx(t_data *data)
+void	cleanup_mlx(t_mlx *mlx)
 {
-	if (!data)
+	if (!mlx)
 		return ;
-	if (data->img)
-		mlx_destroy_image(data->mlx, data->img);
-	if (data->win)
-		mlx_destroy_window(data->mlx, data->win);
-	if (data->mlx)
-		free(data->mlx);
+	if (mlx->img)
+		mlx_destroy_image(mlx->mlx, mlx->img);
+	if (mlx->win)
+		mlx_destroy_window(mlx->mlx, mlx->win);
+	if (mlx->mlx)
+		free(mlx->mlx);
 }
 
 #endif

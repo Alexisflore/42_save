@@ -6,7 +6,7 @@
 /*   By: ladloff <ladloff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 15:02:46 by macbookpro        #+#    #+#             */
-/*   Updated: 2024/04/14 10:35:59 by ladloff          ###   ########.fr       */
+/*   Updated: 2024/04/15 16:57:37 by ladloff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,22 +46,17 @@ void	check_data(int fd, t_data *data, t_path *path)
 	close(fd);
 }
 
-t_path	*check_args(int argc, char **argv, t_data *data)
+t_path	check_args(char **argv, t_data *data)
 {
 	int		fd;
-	t_path	*path;
+	t_path	path;
 
-	path = malloc(sizeof(t_path));
-	if (path == NULL)
-		error_check(path, "Error\nMalloc path\n");
-	if (argc != 2)
-		error_check(path, "Error\nInvalid number of arguments\n");
 	if (ft_strncmp(argv[1] + ft_strlen(argv[1]) - 4, ".cub", 4) != 0)
-		error_check(path, "Error\nInvalid file extension\n");
+		error_check(&path, "Error\nInvalid file extension\n");
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
-		error_check(path, "Error\nFile not found\n");
-	init_path(data, path);
-	check_data(fd, data, path);
+		error_check(&path, "Error\nFile not found\n");
+	init_path(data, &path);
+	check_data(fd, data, &path);
 	return (path);
 }
