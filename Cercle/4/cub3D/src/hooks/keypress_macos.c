@@ -6,7 +6,7 @@
 /*   By: ladloff <ladloff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 12:50:30 by ladloff           #+#    #+#             */
-/*   Updated: 2024/04/14 13:32:44 by ladloff          ###   ########.fr       */
+/*   Updated: 2024/04/15 20:36:26 by ladloff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,8 +100,8 @@ int	player_move_with_angle(int key, t_data *data)
 {
 	if (key == APPLE_KEY_ESCAPE)
 	{
-		free_path(data, data->path);
-		free_data(data);
+		free_path(data, &data->path);
+		cleanup_mlx(&data->mlx);
 		exit(0);
 	}
 	else if (key == APPLE_KEY_LEFT || key == APPLE_KEY_RIGHT)
