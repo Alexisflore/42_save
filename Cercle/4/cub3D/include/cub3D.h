@@ -6,7 +6,7 @@
 /*   By: ladloff <ladloff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 15:26:41 by macbookpro        #+#    #+#             */
-/*   Updated: 2024/04/15 16:58:14 by ladloff          ###   ########.fr       */
+/*   Updated: 2024/04/15 17:37:38 by ladloff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,7 +181,7 @@ void				exit_error(char *message, t_data *data);
 int					is_all_textures(t_path *path);
 void				free_intarray(int **array);
 void				free_char_array(char **array);
-void				free_texture(t_data *data, t_xpm *xpm);
+void				free_texture(t_mlx *mlx, t_xpm *xpm);
 void				error_path(t_data *data, t_path *path, char *message);
 void				init_path(t_data *data, t_path *path);
 void				check_first_texture(t_data *data, t_xpm **texture,

@@ -6,7 +6,7 @@
 /*   By: ladloff <ladloff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 17:10:07 by macbookpro        #+#    #+#             */
-/*   Updated: 2024/04/15 16:51:25 by ladloff          ###   ########.fr       */
+/*   Updated: 2024/04/15 17:32:44 by ladloff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,33 @@ void	cleanup_mlx(t_mlx *mlx)
 
 #endif
 
-void	free_texture(t_data *data, t_xpm *xpm)
+void	free_texture(t_mlx *mlx, t_xpm *xpm)
 {
 	if (xpm == NULL)
 		return ;
 	if (xpm->img)
-		mlx_destroy_image(data->mlx.mlx, xpm->img);
+		mlx_destroy_image(mlx->mlx, xpm->img);
 	free(xpm);
+}
+
+void	free_path(t_data *data, t_path *path)
+{
+	if (path == NULL)
+		return ;
+	if (path->textures != NULL)
+	{
+		free_texture(&data->mlx, path->textures->west);
+		free_texture(&data->mlx, path->textures->east);
+		free_texture(&data->mlx, path->textures->north);
+		free_texture(&data->mlx, path->textures->south);
+	}
+	get_next_line(-1, true);
+	free(path->textures);
+	free(path->floor);
+	free(path->ceiling);
+	free_map(path->map);
+	free_intarray(path->map_array);
+	free_char_array(path->split);
+	free_char_array(path->rgb);
+	free(path->line);
 }

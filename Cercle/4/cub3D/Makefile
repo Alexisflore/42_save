@@ -12,7 +12,6 @@ SRC_FILES	:=	main.c \
 				parsing/check_args.c \
 				rendering/render.c \
 				parsing/colors.c \
-				parsing/initialize.c \
 				rendering/find_values.c \
 				rendering/check_lines.c \
 				rendering/draw_pixels.c \
@@ -23,7 +22,6 @@ SRC_FILES	:=	main.c \
 				get_next_line/get_next_line_utils.c \
 				parsing/split_spaces.c \
 				parsing/init_parsing_values.c \
-				parsing/handling_errors.c \
 				parsing/boolean_test.c \
 				parsing/check_data.c \
 				parsing/check_data1.c \
