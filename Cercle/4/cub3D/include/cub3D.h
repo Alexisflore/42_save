@@ -6,7 +6,7 @@
 /*   By: alfloren <alfloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 15:26:41 by macbookpro        #+#    #+#             */
-/*   Updated: 2024/04/14 18:34:43 by alfloren         ###   ########.fr       */
+/*   Updated: 2024/04/15 11:55:27 by alfloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@
 # define DR 0.00174533
 # define PIXEL_SIZE 64
 # define PIXEL_TEXTURE 64
+# define HEIGHT 640
 
 # ifdef __APPLE__
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ladloff <ladloff@student.42.fr>            +#+  +:+       +#+        */
+/*   By: alfloren <alfloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 17:24:18 by macbookpro        #+#    #+#             */
-/*   Updated: 2024/04/14 14:41:47 by ladloff          ###   ########.fr       */
+/*   Updated: 2024/04/15 11:28:00 by alfloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,8 @@ void	init_values(t_data *data, t_path *path)
 void	mlx_win_init(t_data *data, t_path *path)
 {
 	init_values(data, path);
-	data->win = mlx_new_window(data->mlx, SIDE_LEN, 320, "cub3D");
-	data->img = mlx_new_image(data->mlx, SIDE_LEN, 320);
+	data->win = mlx_new_window(data->mlx, 1200, HEIGHT, "cub3D");
+	data->img = mlx_new_image(data->mlx, 1200, HEIGHT);
 	data->addr = mlx_get_data_addr(data->img, &data->bpp, &data->sl,
 			&data->endian);
 }
