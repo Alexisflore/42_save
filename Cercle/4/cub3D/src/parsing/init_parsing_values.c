@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_parsing_values.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
+/*   By: ladloff <ladloff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 17:41:40 by macbookpro        #+#    #+#             */
-/*   Updated: 2024/04/14 11:07:46 by macbookpro       ###   ########.fr       */
+/*   Updated: 2024/04/15 16:16:54 by ladloff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,12 @@ void	init_path(t_data *data, t_path *path)
 	path->split = NULL;
 	path->rgb = NULL;
 	path->line = NULL;
-	path->mlx = mlx_init();
-	if (path->mlx == NULL)
-		error_path(data, path, "Error\nMlx init\n");
 }
 
 void	init_img_xpm(t_xpm **texture, t_data *data, t_path *path, char *file)
 {
-	(*texture)->img = mlx_xpm_file_to_image(path->mlx, file, &(*texture)->width,
-			&(*texture)->height);
+	(*texture)->img = mlx_xpm_file_to_image(data->mlx.mlx, file,
+		&(*texture)->width, &(*texture)->height);
 	if ((*texture)->img == NULL)
 		error_path(data, path, "Error\nInvalid (*texture)\n");
 	(*texture)->addr = mlx_get_data_addr((*texture)->img, &(*texture)->bpp,

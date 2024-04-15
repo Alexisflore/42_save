@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   drawing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alfloren <alfloren@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ladloff <ladloff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 16:17:54 by macbookpro        #+#    #+#             */
-/*   Updated: 2024/04/15 11:55:37 by alfloren         ###   ########.fr       */
+/*   Updated: 2024/04/15 15:44:17 by ladloff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ void	draw_floor_and_ceiling(t_data *data)
 		while (y < 640)
 		{
 			if (y < (HEIGHT / 2) && x < 1200)
-				put_pxl_to_img(data, x, y, convert_rgb_to_hex(data->ceiling));
+				put_pxl_to_img(&data->mlx, x, y, convert_rgb_to_hex(data->ceiling));
 			else if (y >= (HEIGHT / 2) && y < HEIGHT && x < 1200)
-				put_pxl_to_img(data, x, y, convert_rgb_to_hex(data->floor));
+				put_pxl_to_img(&data->mlx, x, y, convert_rgb_to_hex(data->floor));
 			y++;
 		}
 		x++;
@@ -58,28 +58,8 @@ void	directtion_line(t_data *data, int color)
 	i = 0;
 	while (i < 50)
 	{
-		put_pxl_to_img(data, data->px + i * cos(data->pa) + 5, data->py + i
+		put_pxl_to_img(&data->mlx, data->px + i * cos(data->pa) + 5, data->py + i
 			* sin(data->pa) + 5, color);
 		i++;
 	}
 }
-
-// void draw_line(t_data *data, int x1, int y1, int x2, int y2, int color)
-// {
-//     int dx = x2 - x1;
-//     int dy = y2 - y1;
-//     int steps = abs(dx) > abs(dy) ? abs(dx) : abs(dy);
-//     float Xinc = dx / (float)steps;
-//     float Yinc = dy / (float)steps;
-//     float X = x1;
-//     float Y = y1;
-//     int i = 0;
-//     while (i <= steps)
-//     {
-//         // mlx_pixel_put(data->mlx, data->win, X, Y, color);
-//         put_pxl_to_img(data, X, Y, color);
-//         X += Xinc;
-//         Y += Yinc;
-//         i++;
-//     }
-// }

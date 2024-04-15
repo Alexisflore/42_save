@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_pixels.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
+/*   By: ladloff <ladloff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 17:27:35 by macbookpro        #+#    #+#             */
-/*   Updated: 2024/04/13 17:27:53 by macbookpro       ###   ########.fr       */
+/*   Updated: 2024/04/15 15:43:21 by ladloff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	pixel_drawing(t_data *data, t_pixel pix)
 		j = 0;
 		while (j < pix.size)
 		{
-			put_pxl_to_img(data, pix.x + i, pix.y + j, pix.color);
+			put_pxl_to_img(&data->mlx, pix.x + i, pix.y + j, pix.color);
 			j++;
 		}
 		i++;

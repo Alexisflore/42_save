@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handling_errors.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
+/*   By: ladloff <ladloff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 17:55:00 by macbookpro        #+#    #+#             */
-/*   Updated: 2024/04/14 14:33:09 by macbookpro       ###   ########.fr       */
+/*   Updated: 2024/04/15 16:20:11 by ladloff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	error_path(t_data *data, t_path *path, char *message)
 {
 	ft_putstr_fd(message, 2);
 	free_path(data, path);
-	free_data(data);
+	cleanup_mlx(&data->mlx);
 	exit(1);
 }
 

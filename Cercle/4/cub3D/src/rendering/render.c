@@ -3,41 +3,41 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alfloren <alfloren@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ladloff <ladloff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 17:28:26 by macbookpro        #+#    #+#             */
-/*   Updated: 2024/04/15 15:48:15 by alfloren         ###   ########.fr       */
+/*   Updated: 2024/04/15 15:42:52 by ladloff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 #include <time.h>
 
-void	put_pxl_to_img(t_data *data, int x, int y, int color)
+void	put_pxl_to_img(t_mlx *mlx, int x, int y, int color)
 {
 	if (x < 1200 && y < 640)
 	{
-		color = mlx_get_color_value(data->mlx, color);
-		ft_memcpy(data->addr + 4 * 1200 * y + x * 4, &color,
+		color = mlx_get_color_value(mlx->mlx, color);
+		ft_memcpy(mlx->addr + 4 * 1200 * y + x * 4, &color,
 			sizeof(int));
 	}
 }
 
-void	put_pxl_to_720_img(t_data *data, int x, int y, int color)
+static void	put_pxl_to_720_img(t_mlx *mlx, int x, int y, int color)
 {
 	int	i;
 	int	j;
 
 	if (x < 1200 && y < HEIGHT)
 	{
-		color = mlx_get_color_value(data->mlx, color);
+		color = mlx_get_color_value(mlx->mlx, color);
 		j = 0;
 		while (j < 2)
 		{
 			i = 0;
 			while (i < 2)
 			{
-				ft_memcpy(data->addr + 4 * 1200 * (y + j) + (x + i) * 4, &color,
+				ft_memcpy(mlx->addr + 4 * 1200 * (y + j) + (x + i) * 4, &color,
 					sizeof(int));
 				i++;
 			}
@@ -88,7 +88,7 @@ void	draw_3d_wall(t_data *data, t_ray *rayH, t_ray *rayV)
 		{
 			wall->color = data->texture->texture[(int)wall->tx + PIXEL_SIZE
 				* (int)wall->ty];
-			put_pxl_to_720_img(data, rayH->r * 2, wall->lineoff * 2 + j * 2,
+			put_pxl_to_720_img(&data->mlx, rayH->r * 2, wall->lineoff * 2 + j * 2,
 				wall->color);
 		}
 		wall->ty += wall->ty_step;
@@ -115,5 +115,5 @@ void	drawrays_3d(t_data *data)
 		find_angle(&rayh, &rayv);
 		rayh.r += 1;
 	}
-	mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
+	mlx_put_image_to_window(data->mlx.mlx, data->mlx.win, data->mlx.img, 0, 0);
 }

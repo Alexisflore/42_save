@@ -6,7 +6,7 @@
 /*   By: ladloff <ladloff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 15:26:41 by macbookpro        #+#    #+#             */
-/*   Updated: 2024/04/15 11:55:27 by alfloren         ###   ########.fr       */
+/*   Updated: 2024/04/15 16:18:33 by ladloff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,6 @@ typedef struct s_ray
 
 typedef struct t_path
 {
-	void			*mlx;
 	char			*s;
 	char			*line;
 	char			**split;
@@ -144,15 +143,19 @@ typedef struct t_path
 	double			player_angle;
 }					t_path;
 
-typedef struct s_data
+typedef struct s_mlx
 {
 	void			*mlx;
 	void			*win;
 	void			*img;
 	char			*addr;
 	int				bpp;
-	int				sl;
+	int				size_line;
 	int				endian;
+}				t_mlx;
+
+typedef struct s_data
+{
 	int				**map;
 	int				mapx;
 	int				mapy;
@@ -165,6 +168,7 @@ typedef struct s_data
 	t_ray			*ray;
 	double			dist;
 	double			shade;
+	t_mlx			mlx;
 	t_texture		*textures;
 	t_xpm			*texture;
 	t_rgb			*floor;
@@ -229,24 +233,20 @@ void				pixel_drawing(t_data *data, t_pixel pix);
 // 						int color);
 void				draw_floor_and_ceiling(t_data *data);
 void				drawrays_3d(t_data *data);
-void				mlx_win_init(t_data *data, t_path *path);
-void				put_pxl_to_img(t_data *data, int x, int y, int color);
+void				put_pxl_to_img(t_mlx *mlx, int x, int y, int color);
 void				draw_3d_wall(t_data *data, t_ray *rayH, t_ray *rayV);
 void				find_angle(t_ray *rayH, t_ray *rayV);
 void				check_vertical_lines(t_data *data, t_ray *ray);
 void				init_rayv(t_ray *ray, t_data *data);
 void				check_horizontal_lines(t_data *data, t_ray *ray);
 void				init_rayh(t_ray *ray, t_data *data);
-void				draw_ray(t_data *data, t_ray *rayH, t_ray *rayV, int color);
 double				dist(double x1, double y1, double x2, double y2);
 int					convert_rgb_to_hex(t_rgb *rgb);
 void				find_dist_t(t_data *data, t_ray *rayH, t_ray *rayV);
-int					get_fps(void);
 void				drawmap(t_data *data);
 
-/* free */
-void				free_data(t_data *data);
-
 int					player_move_with_angle(int key, t_data *data);
+
+void				cleanup_mlx(t_mlx *mlx);
 
 #endif
