@@ -6,14 +6,13 @@
 /*   By: ladloff <ladloff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 15:26:41 by macbookpro        #+#    #+#             */
-/*   Updated: 2024/04/15 17:37:38 by ladloff          ###   ########.fr       */
+/*   Updated: 2024/04/15 17:49:41 by ladloff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include "get_next_line.h"
 # include "libft.h"
 # include "mlx.h"
 # include <errno.h>

@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
+/*   By: ladloff <ladloff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 10:48:41 by alfloren          #+#    #+#             */
-/*   Updated: 2024/04/14 11:47:41 by macbookpro       ###   ########.fr       */
+/*   Updated: 2024/04/15 17:48:36 by ladloff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
-#include <stdio.h>
+#include "libft.h"
 
 char	*get_next_line(int fd, bool free_static)
 {
@@ -132,34 +131,3 @@ int	gnl_strlen(char *str)
 		;
 	return (i);
 }
-// #include <stdio.h>
-// #include <sys/types.h>
-// #include <sys/stat.h>
-// #include <fcntl.h>
-
-// int	main(void)
-// {
-// 	int		fd;
-// 	char	*line;
-// 	int		i;
-
-// 	fd = open("get_next_line.h", O_RDONLY);
-// 	if (fd < 0)
-// 		return (1);
-// 	i = 1;
-// 	while (1)
-// 	{
-// 		line = get_next_line(fd);
-// 		if (!line)
-// 		{
-// 			i = 0;
-// 			// printf("PLUS DE RESULTAT\n");
-// 			free(line);
-// 			break ;
-// 		}
-// 		printf("%s", line);
-// 		free(line);
-// 		i++;
-// 	}
-// 	return (0);
-// }

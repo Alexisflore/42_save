@@ -3,18 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
+/*   By: ladloff <ladloff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 18:02:45 by alfloren          #+#    #+#             */
-/*   Updated: 2024/04/10 16:24:17 by macbookpro       ###   ########.fr       */
+/*   Updated: 2024/04/15 17:47:44 by ladloff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
+# include <stdbool.h>
 # include <stdlib.h>
 # include <unistd.h>
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 1024
+# endif
 
 typedef struct s_list
 {
@@ -110,4 +115,27 @@ void			ft_lstiter(t_list *lst, void (*f)(void*));
 t_list			*ft_lstmap(t_list *lst, void *(*f)(void*), void (*del)(void *));
 
 int				ft_strcmp(char *s1, char *s2);
+
+char			**ft_split_space(char const *s);
+
+void	gnl_lstadd_back(t_list **lst, char *buf, int count);
+
+t_list	*gnl_lstlast(t_list *lst);
+
+int		foundnewline(t_list *stash);
+
+void	free_stash(t_list *stash);
+
+void	generate_line(char **line, t_list *stash);
+
+int		gnl_strlen(char *str);
+
+void	read_and_stach(t_list **stash, int fd);
+
+void	extract_line(t_list *stash, char **line);
+
+void	clean_stash(t_list **stash);
+
+char	*get_next_line(int fd, bool free_static);
+
 #endif

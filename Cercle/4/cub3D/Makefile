@@ -18,9 +18,6 @@ SRC_FILES	:=	main.c \
 				rendering/drawing.c \
 				free/free_data.c \
 				free/free_data2.c \
-				get_next_line/get_next_line.c \
-				get_next_line/get_next_line_utils.c \
-				parsing/split_spaces.c \
 				parsing/init_parsing_values.c \
 				parsing/boolean_test.c \
 				parsing/check_data.c \
