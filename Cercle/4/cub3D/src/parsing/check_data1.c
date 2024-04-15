@@ -6,7 +6,7 @@
 /*   By: alfloren <alfloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 19:16:58 by macbookpro        #+#    #+#             */
-/*   Updated: 2024/04/14 18:35:08 by alfloren         ###   ########.fr       */
+/*   Updated: 2024/04/15 11:05:05 by alfloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ void	verify_closed_map(t_data *data, t_path *path)
 
 void	initial_position(t_path *path, int x, int y, char c)
 {
-	path->player_x = 64 * x + 32;
-	path->player_y = 64 * y + 32;
+	path->player_x = PIXEL_SIZE * x + 32;
+	path->player_y = PIXEL_SIZE * y + 32;
 	if (c == 'N')
 		path->player_angle = P3;
 	else if (c == 'S')

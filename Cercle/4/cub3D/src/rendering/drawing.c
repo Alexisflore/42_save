@@ -6,7 +6,7 @@
 /*   By: alfloren <alfloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 16:17:54 by macbookpro        #+#    #+#             */
-/*   Updated: 2024/04/14 16:51:12 by alfloren         ###   ########.fr       */
+/*   Updated: 2024/04/15 11:55:37 by alfloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,14 @@ void	draw_floor_and_ceiling(t_data *data)
 	int	y;
 
 	x = 0;
-	while (x < SIDE_LEN)
+	while (x < 1200)
 	{
 		y = 0;
-		while (y < SIDE_LEN)
+		while (y < 640)
 		{
-			if (y < 160 && x < 600)
+			if (y < (HEIGHT / 2) && x < 1200)
 				put_pxl_to_img(data, x, y, convert_rgb_to_hex(data->ceiling));
-			else if (y >= 160 && y < 320 && x < 600)
+			else if (y >= (HEIGHT / 2) && y < HEIGHT && x < 1200)
 				put_pxl_to_img(data, x, y, convert_rgb_to_hex(data->floor));
 			y++;
 		}
