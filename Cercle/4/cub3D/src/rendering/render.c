@@ -6,7 +6,7 @@
 /*   By: alfloren <alfloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 17:28:26 by macbookpro        #+#    #+#             */
-/*   Updated: 2024/04/15 12:05:28 by alfloren         ###   ########.fr       */
+/*   Updated: 2024/04/15 14:46:57 by alfloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,27 @@ void	put_pxl_to_img(t_data *data, int x, int y, int color)
 	}
 }
 
-void put_pxl_to_720_img(t_data *data, int x, int y, int color)
+void	put_pxl_to_720_img(t_data *data, int x, int y, int color)
 {
+	int	i;
+
 	if (x < 1200 && y < HEIGHT)
 	{
+		i = 0;
 		color = mlx_get_color_value(data->mlx, color);
-		for (int i = 0; i < 2; i++)
+		while (i < 2)
+		{
 			ft_memcpy(data->addr + 4 * 1200 * (y) + (x + i) * 4, &color,
 				sizeof(int));
-		for (int i = 0; i < 2; i++)
+			i++;
+		}
+		i = 0;
+		while (i < 2)
+		{
 			ft_memcpy(data->addr + 4 * 1200 * (y + 1) + (x + i) * 4, &color,
 				sizeof(int));
+			i++;
+		}
 	}
 }
 
@@ -79,7 +89,6 @@ void	draw_3d_wall(t_data *data, t_ray *rayH, t_ray *rayV)
 		{
 			wall->color = data->texture->texture[(int)wall->tx + PIXEL_SIZE
 				* (int)wall->ty];
-			// put_pxl_to_img(data, rayH->r, wall->lineoff + j, wall->color);
 			put_pxl_to_720_img(data, rayH->r * 2, wall->lineoff * 2 + j * 2,
 				wall->color);
 		}
