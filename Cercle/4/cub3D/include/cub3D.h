@@ -6,7 +6,7 @@
 /*   By: ladloff <ladloff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 15:26:41 by macbookpro        #+#    #+#             */
-/*   Updated: 2024/04/15 17:49:41 by ladloff          ###   ########.fr       */
+/*   Updated: 2024/04/15 18:29:12 by ladloff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,76 +175,128 @@ typedef struct s_data
 	t_rgb			*ceiling;
 }					t_data;
 
-/* parsing */
-void				exit_error(char *message, t_data *data);
-int					is_all_textures(t_path *path);
+/* free_data.c */
+
+void				cleanup_mlx(t_mlx *mlx);
+void				free_texture(t_mlx *mlx, t_xpm *xpm);
+void				free_path(t_data *data, t_path *path);
+
+/* free_data2.c */
+
 void				free_intarray(int **array);
 void				free_char_array(char **array);
-void				free_texture(t_mlx *mlx, t_xpm *xpm);
-void				error_path(t_data *data, t_path *path, char *message);
-void				init_path(t_data *data, t_path *path);
+void				free_map(t_map *map);
+
+/* keypress_linux.c - keypress_macos.c */
+
+int					player_move_with_angle(int key, t_data *data);
+
+/* boolean_test.c */
+
+int					is_all_textures(t_path *path);
+int					is_a_direction(char c);
+int					is_all_spaces_or_newline(t_path *path);
+int					is_texture(char *str);
+int					is_rgb(char *str);
+
+/* check_args.c */
+
+void				final_check(t_data *data, t_path *path);
+void				check_data(int fd, t_data *data, t_path *path);
+t_path				check_args(char **argv, t_data *data);
+
+/* check_data.c */
+
 void				check_first_texture(t_data *data, t_xpm **texture,
 						t_path *path);
 void				check_texture(t_data *data, t_path *path);
 void				check_nbr(t_data *data, char *str, t_path *path, int *rgb);
-void				fill_rgb(t_data *data, t_path *path, t_rgb **rgb);
-void				create_rgb(t_data *data, t_path *path, t_rgb **rgb);
 void				check_rgb(t_data *data, t_path *path);
-void				init_tmap(t_data *data, t_map *new, t_path *path);
-void				create_map(t_data *data, t_path *path);
-int					is_texture(char *str);
-int					is_rgb(char *str);
-void				free_map(t_map *map);
-int					size_x(t_map *map);
-int					max_size(t_data *data, t_path *path, t_map *map);
+void				check_wall_around(t_data *data, t_path *path, int i, int j);
+
+/* check_data1.c*/
+
+void				check_textures_and_rgb(t_data *data, t_path *path);
+void				check_map(t_data *data, t_path *path);
+void				test4wall(t_data *data, t_path *path, int i, int j);
+void				verify_closed_map(t_data *data, t_path *path);
+void				initial_position(t_path *path, int x, int y, char c);
+
+/* colors.c */
+
+int					convert_rgb_to_hex(t_rgb *rgb);
+
+/* creates_data.c */
+
+void				create_map_array(t_data *data, t_path *path);
 void				create_x_array(t_data *data, t_path *path, int i,
 						t_map *tmp);
-void				test4wall(t_data *data, t_path *path, int i, int j);
-void				check_wall_around(t_data *data, t_path *path, int i, int j);
-void				verify_closed_map(t_data *data, t_path *path);
-void				create_map_array(t_data *data, t_path *path);
-void				check_map(t_data *data, t_path *path);
-void				final_check(t_data *data, t_path *path);
-void				check_textures_and_rgb(t_data *data, t_path *path);
-void				check_data(int fd, t_data *data, t_path *path);
-t_path				check_args(char **argv, t_data *data);
-void				t_map_add_back(t_map **alst, t_map *new);
-void				error_check(t_path *path, char *message);
-int					is_all_spaces_or_newline(t_path *path);
-void				init_img_xpm(t_xpm **texture, t_data *data, t_path *path,
-						char *file);
-int					int_line(t_data *data, t_path **path, int i);
-int					is_a_direction(char c);
-void				next_data(t_path *path, int fd);
+void				create_map(t_data *data, t_path *path);
+void				create_rgb(t_data *data, t_path *path, t_rgb **rgb);
 void				create_final_map(t_path *path);
-void				initial_position(t_path *path, int x, int y, char c);
-void				free_path(t_data *data, t_path *path);
+
+/* init_parsing_values.c */
+
+void				init_path(t_data *data, t_path *path);
+void				init_img_xpm(t_xpm **texture, t_data *data,
+						t_path *path, char *file);
+int					int_line(t_data *data, t_path **path, int i);
+void				init_tmap(t_data *data, t_map *new, t_path *path);
+
+/* parsing_utils.c */
+
+void				t_map_add_back(t_map **alst, t_map *new);
+int					size_x(t_map *map);
+int					max_size(t_data *data, t_path *path, t_map *map);
+void				next_data(t_path *path, int fd);
+void				fill_rgb(t_data *data, t_path *path, t_rgb **rgb);
+
+/* parsing_utils1.c */
+
 int					array_size(char **array);
 void				delete_newline(char ***array);
-char				**ft_split_space(char const *s);
 
-/* rendering */
-t_pixel				pixel(int x, int y, int size, int color);
-void				pixel_drawing(t_data *data, t_pixel pix);
-void				draw_floor_and_ceiling(t_data *data);
-void				drawrays_3d(t_data *data);
-void				put_pxl_to_img(t_mlx *mlx, int x, int y, int color);
-void				draw_3d_wall(t_data *data, t_ray *rayH, t_ray *rayV);
-void				find_angle(t_ray *rayH, t_ray *rayV);
-void				check_vertical_lines(t_data *data, t_ray *ray);
-void				init_rayv(t_ray *ray, t_data *data);
-void				check_horizontal_lines(t_data *data, t_ray *ray);
+/* check_lines.c */
+
 void				init_rayh(t_ray *ray, t_data *data);
-double				dist(double x1, double y1, double x2, double y2);
-int					convert_rgb_to_hex(t_rgb *rgb);
-void				find_dist_t(t_data *data, t_ray *rayH, t_ray *rayV);
+void				check_horizontal_lines(t_data *data, t_ray *ray);
+void				init_rayv(t_ray *ray, t_data *data);
+void				check_vertical_lines(t_data *data, t_ray *ray);
+
+/* draw_pixels.c */
+
+void				pixel_drawing(t_data *data, t_pixel pix);
+t_pixel				pixel(int x, int y, int size, int color);
+
+/* drawing.c */
+
+void				draw_floor_and_ceiling(t_data *data);
 void				drawmap(t_data *data);
+void				directtion_line(t_data *data, int color);
 
-int					player_move_with_angle(int key, t_data *data);
+/* find_values.c */
 
-void				cleanup_mlx(t_mlx *mlx);
+void				find_angle(t_ray *rayH, t_ray *rayV);
+void				find_dist_t(t_data *data, t_ray *rayH, t_ray *rayV);
+double				dist(double ax, double ay, double bx, double by);
+
+/* render.c */
+
+void				put_pxl_to_img(t_mlx *mlx, int x, int y, int color);
+t_wall				*init_wall(t_data *data, t_ray *rayH, t_ray *rayV);
+void				draw_3d_wall(t_data *data, t_ray *rayH, t_ray *rayV);
+void				drawrays_3d(t_data *data);
+
+/* error.c */
+
+void				exit_error(char *message, t_data *data);
+void				error_path(t_data *data, t_path *path, char *message);
+void				error_check(t_path *path, char *message);
+
+/* init.c */
 
 void				init_values(t_data *data, t_path *path);
 t_mlx				setup_mlx(char *title);
+
 
 #endif
