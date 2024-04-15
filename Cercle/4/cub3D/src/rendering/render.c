@@ -6,7 +6,7 @@
 /*   By: ladloff <ladloff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 17:28:26 by macbookpro        #+#    #+#             */
-/*   Updated: 2024/04/15 15:42:52 by ladloff          ###   ########.fr       */
+/*   Updated: 2024/04/15 17:55:11 by ladloff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,8 @@ void	draw_3d_wall(t_data *data, t_ray *rayH, t_ray *rayV)
 		{
 			wall->color = data->texture->texture[(int)wall->tx + PIXEL_SIZE
 				* (int)wall->ty];
-			put_pxl_to_720_img(&data->mlx, rayH->r * 2, wall->lineoff * 2 + j * 2,
-				wall->color);
+			put_pxl_to_720_img(&data->mlx, rayH->r * 2,
+				wall->lineoff * 2 + j * 2, wall->color);
 		}
 		wall->ty += wall->ty_step;
 		j++;

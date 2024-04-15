@@ -6,7 +6,7 @@
 /*   By: ladloff <ladloff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 16:45:59 by ladloff           #+#    #+#             */
-/*   Updated: 2024/04/15 16:59:31 by ladloff          ###   ########.fr       */
+/*   Updated: 2024/04/15 17:55:21 by ladloff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ t_mlx	setup_mlx(char *title)
 	if (!mlx.img)
 		exit(4);
 	mlx.addr = mlx_get_data_addr(mlx.img, &mlx.bpp, &mlx.size_line,
-		&mlx.endian);
+			&mlx.endian);
 	if (!mlx.addr)
 		exit(5);
 	return (mlx);
